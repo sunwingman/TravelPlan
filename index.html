@@ -9,447 +9,427 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
 :root {
-  --cream: #f7f2e8;
-  --cream2: #faf6ef;
-  --dark: #101820;
-  --navy: #192740;
-  --navy2: #1e3252;
-  --gold: #c48a2e;
-  --gold-light: #e8c882;
-  --text: #252525;
-  --text-light: #606060;
-  --white: #ffffff;
-  --d1: #2e7fa0;
-  --d2: #7454a8;
-  --d3: #2a8060;
-  --d4: #c47030;
-  --d5: #b83030;
-  --shadow: 0 4px 24px rgba(0,0,0,0.09);
-  --shadow-lg: 0 8px 40px rgba(0,0,0,0.14);
+  --cream:#f7f2e8; --cream2:#faf6ef;
+  --dark:#101820; --navy:#192740;
+  --gold:#c48a2e; --gold-light:#e8c882;
+  --text:#252525; --text-light:#606060; --white:#fff;
+  --d1:#2e7fa0; --d2:#7454a8; --d3:#2a8060; --d4:#c47030; --d5:#b83030;
+  --food:#e85a2a; --souvenir:#3a7a3a;
+  --shadow:0 4px 24px rgba(0,0,0,.09);
+  --shadow-lg:0 8px 40px rgba(0,0,0,.14);
 }
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Noto Serif TC', serif;
-  background: var(--cream);
-  color: var(--text);
-  line-height: 1.75;
-}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Serif TC',serif;background:var(--cream);color:var(--text);line-height:1.75}
 
 /* ─── HERO ─── */
-.hero {
-  background: var(--navy);
-  color: #fff;
-  padding: 64px 24px 72px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero-bg {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 70% 50% at 15% 60%, rgba(46,127,160,0.35) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 70% at 85% 25%, rgba(116,84,168,0.25) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 50% 100%, rgba(196,112,48,0.2) 0%, transparent 55%);
-  pointer-events: none;
-}
-.hero-snowflakes {
-  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
-}
-.sf {
-  position: absolute;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.18);
-  animation: drift linear infinite;
-}
-@keyframes drift {
-  0%   { transform: translateY(-20px) translateX(0); opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 0.5; }
-  100% { transform: translateY(110vh) translateX(40px); opacity: 0; }
-}
-.hero-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
-.hero-flag { font-size: 44px; display: block; margin-bottom: 14px; animation: popIn 0.6s ease; }
-@keyframes popIn { from { transform: scale(0.5); opacity:0; } to { transform: scale(1); opacity:1; } }
-.hero-eyebrow {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 17px;
-  color: var(--gold-light);
-  letter-spacing: 5px;
-  margin-bottom: 14px;
-  text-transform: uppercase;
-  opacity: 0.9;
-}
-.hero h1 {
-  font-family: 'Noto Serif TC', serif;
-  font-weight: 700;
-  font-size: clamp(26px, 5.5vw, 52px);
-  line-height: 1.25;
-  margin-bottom: 10px;
-  letter-spacing: 3px;
-}
-.hero h1 em { color: var(--gold-light); font-style: normal; }
-.hero-sub {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 15px;
-  opacity: 0.65;
-  margin-bottom: 34px;
-  letter-spacing: 2px;
-  font-weight: 300;
-}
-.badges { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-.badge {
-  background: rgba(255,255,255,0.09);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 40px;
-  padding: 7px 18px;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13px;
-  font-weight: 300;
-  color: var(--gold-light);
-  letter-spacing: 1px;
-}
+.hero{background:var(--navy);color:#fff;padding:64px 24px 72px;text-align:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 15% 60%,rgba(46,127,160,.35) 0%,transparent 65%),radial-gradient(ellipse 50% 70% at 85% 25%,rgba(116,84,168,.25) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 50% 100%,rgba(196,112,48,.2) 0%,transparent 55%);pointer-events:none}
+.hero-snowflakes{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.sf{position:absolute;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.18);animation:drift linear infinite}
+@keyframes drift{0%{transform:translateY(-20px) translateX(0);opacity:0}10%{opacity:1}90%{opacity:.5}100%{transform:translateY(110vh) translateX(40px);opacity:0}}
+.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto}
+.hero-flag{font-size:44px;display:block;margin-bottom:14px;animation:popIn .6s ease}
+@keyframes popIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--gold-light);letter-spacing:5px;margin-bottom:14px;text-transform:uppercase;opacity:.9}
+.hero h1{font-family:'Noto Serif TC',serif;font-weight:700;font-size:clamp(26px,5.5vw,52px);line-height:1.25;margin-bottom:10px;letter-spacing:3px}
+.hero h1 em{color:var(--gold-light);font-style:normal}
+.hero-sub{font-family:'Noto Sans TC',sans-serif;font-size:15px;opacity:.65;margin-bottom:34px;letter-spacing:2px;font-weight:300}
+.badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.badge{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);border-radius:40px;padding:7px 18px;font-family:'Noto Sans TC',sans-serif;font-size:13px;font-weight:300;color:var(--gold-light);letter-spacing:1px}
 
 /* ─── DAY NAV ─── */
-.day-nav {
-  background: var(--dark);
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  box-shadow: 0 3px 20px rgba(0,0,0,0.4);
-}
-.day-nav-inner {
-  display: flex;
-  max-width: 1240px;
-  margin: 0 auto;
-  overflow-x: auto;
-  scrollbar-width: none;
-  padding: 0 8px;
-}
-.day-nav-inner::-webkit-scrollbar { display: none; }
-.day-btn {
-  flex-shrink: 0;
-  background: none;
-  border: none;
-  border-bottom: 3px solid transparent;
-  color: rgba(255,255,255,0.45);
-  padding: 15px 18px;
-  cursor: pointer;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13.5px;
-  font-weight: 500;
-  transition: color 0.25s, border-color 0.25s;
-  white-space: nowrap;
-  letter-spacing: 0.5px;
-}
-.day-btn:hover { color: rgba(255,255,255,0.8); }
-.day-btn.active { color: #fff; }
-.day-btn[data-day="1"].active  { border-color: var(--d1); }
-.day-btn[data-day="2"].active  { border-color: var(--d2); }
-.day-btn[data-day="3"].active  { border-color: var(--d3); }
-.day-btn[data-day="4"].active  { border-color: var(--d4); }
-.day-btn[data-day="5"].active  { border-color: var(--d5); }
-.day-btn[data-day="all"].active { border-color: var(--gold); }
+.day-nav{background:var(--dark);position:sticky;top:0;z-index:200;box-shadow:0 3px 20px rgba(0,0,0,.4)}
+.day-nav-inner{display:flex;max-width:1240px;margin:0 auto;overflow-x:auto;scrollbar-width:none;padding:0 8px}
+.day-nav-inner::-webkit-scrollbar{display:none}
+.day-btn{flex-shrink:0;background:none;border:none;border-bottom:3px solid transparent;color:rgba(255,255,255,.45);padding:15px 16px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;font-size:13px;font-weight:500;transition:color .25s,border-color .25s;white-space:nowrap;letter-spacing:.5px}
+.day-btn:hover{color:rgba(255,255,255,.8)}
+.day-btn.active{color:#fff}
+.day-btn[data-day="1"].active{border-color:var(--d1)}
+.day-btn[data-day="2"].active{border-color:var(--d2)}
+.day-btn[data-day="3"].active{border-color:var(--d3)}
+.day-btn[data-day="4"].active{border-color:var(--d4)}
+.day-btn[data-day="5"].active{border-color:var(--d5)}
+.day-btn[data-day="all"].active{border-color:var(--gold)}
+.day-btn[data-day="food"].active{border-color:var(--food)}
+.day-btn[data-day="souvenir"].active{border-color:var(--souvenir)}
 
 /* ─── MAIN LAYOUT ─── */
-.wrapper {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 36px 20px 60px;
-  display: grid;
-  grid-template-columns: 1fr 460px;
-  gap: 36px;
-  align-items: start;
-}
-@media (max-width: 960px) {
-  .wrapper { grid-template-columns: 1fr; padding: 24px 16px 48px; }
-}
+.wrapper{max-width:1240px;margin:0 auto;padding:36px 20px 60px;display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:start}
+@media(max-width:960px){.wrapper{grid-template-columns:1fr;padding:24px 16px 48px}}
 
 /* ─── MAP PANEL ─── */
-.map-panel {
-  position: sticky;
-  top: 58px;
-}
-#map {
-  height: 500px;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  border: 3px solid rgba(255,255,255,0.9);
-}
-.map-legend {
-  background: white;
-  border-radius: 14px;
-  padding: 16px 18px;
-  margin-top: 14px;
-  box-shadow: var(--shadow);
-}
-.map-legend h4 {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--text-light);
-  margin-bottom: 12px;
-}
-.legend-list { display: flex; flex-wrap: wrap; gap: 8px; }
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px;
-  padding: 5px 12px;
-  border-radius: 20px;
-  cursor: pointer;
-  border: 1.5px solid rgba(0,0,0,0.08);
-  transition: all 0.2s;
-  background: var(--cream2);
-  color: var(--text);
-}
-.legend-item:hover { transform: scale(1.04); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-.legend-item.active-legend { border-color: currentColor; font-weight: 500; }
-.ldot { width: 10px; height: 10px; border-radius: 50%; }
-@media (max-width: 960px) {
-  .map-panel { position: relative; top: 0; order: -1; }
-  #map { height: 360px; }
-}
+.map-panel{position:sticky;top:58px}
+#map{height:500px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-lg);border:3px solid rgba(255,255,255,.9)}
+.map-legend{background:white;border-radius:14px;padding:16px 18px;margin-top:14px;box-shadow:var(--shadow)}
+.map-legend h4{font-family:'Noto Sans TC',sans-serif;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:2px;color:var(--text-light);margin-bottom:12px}
+.legend-list{display:flex;flex-wrap:wrap;gap:8px}
+.legend-item{display:flex;align-items:center;gap:7px;font-family:'Noto Sans TC',sans-serif;font-size:12px;padding:5px 12px;border-radius:20px;cursor:pointer;border:1.5px solid rgba(0,0,0,.08);transition:all .2s;background:var(--cream2);color:var(--text)}
+.legend-item:hover{transform:scale(1.04);box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.legend-item.active-legend{border-color:currentColor;font-weight:500}
+.ldot{width:10px;height:10px;border-radius:50%}
+@media(max-width:960px){.map-panel{position:relative;top:0;order:-1}#map{height:360px}}
 
-/* ─── DAY PANELS ─── */
-.day-panel { display: none; }
-.day-panel.active { display: block; animation: rise 0.38s ease; }
-@keyframes rise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+/* ─── PANELS ─── */
+.day-panel,.all-panel,.food-panel,.souvenir-panel{display:none}
+.day-panel.active,.all-panel.active,.food-panel.active,.souvenir-panel.active{display:block;animation:rise .38s ease}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 /* Day header */
-.day-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  margin-bottom: 28px;
-  padding-bottom: 22px;
-  border-bottom: 1px solid rgba(0,0,0,0.07);
-}
-.day-badge {
-  flex-shrink: 0;
-  width: 60px; height: 60px;
-  border-radius: 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-family: 'Noto Sans TC', sans-serif;
-}
-.day-badge .db-day { font-size: 10px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 2px; }
-.day-badge .db-num { font-size: 26px; font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1; }
-.day-meta { flex: 1; }
-.day-title {
-  font-family: 'Noto Serif TC', serif;
-  font-size: clamp(16px, 3.5vw, 22px);
-  font-weight: 700;
-  margin-bottom: 8px;
-  line-height: 1.35;
-}
-.route-flow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px;
-  color: var(--text-light);
-}
-.rnode {
-  background: var(--cream);
-  border-radius: 20px;
-  padding: 3px 10px;
-  border: 1px solid rgba(0,0,0,0.1);
-  white-space: nowrap;
-}
-.rarrow { color: var(--gold); font-weight: 700; font-size: 13px; }
+.day-header{display:flex;align-items:flex-start;gap:18px;margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid rgba(0,0,0,.07)}
+.day-badge{flex-shrink:0;width:60px;height:60px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;font-family:'Noto Sans TC',sans-serif}
+.day-badge .db-day{font-size:10px;letter-spacing:2px;opacity:.85;margin-bottom:2px}
+.day-badge .db-num{font-size:26px;font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1}
+.day-meta{flex:1}
+.day-title{font-family:'Noto Serif TC',serif;font-size:clamp(16px,3.5vw,22px);font-weight:700;margin-bottom:8px;line-height:1.35}
+.route-flow{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--text-light)}
+.rnode{background:var(--cream);border-radius:20px;padding:3px 10px;border:1px solid rgba(0,0,0,.1);white-space:nowrap}
+.rarrow{color:var(--gold);font-weight:700;font-size:13px}
 
 /* Location cards */
-.loc-card {
-  background: white;
-  border-radius: 14px;
-  padding: 18px 20px;
-  margin-bottom: 14px;
-  box-shadow: var(--shadow);
-  border-left: 4px solid transparent;
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
-}
-.loc-card:hover {
-  transform: translateX(5px);
-  box-shadow: 0 6px 28px rgba(0,0,0,0.12);
-}
-.loc-card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 10px; }
-.loc-emoji {
-  font-size: 26px;
-  width: 48px; height: 48px;
-  border-radius: 12px;
-  background: var(--cream);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.loc-text { flex: 1; }
-.loc-name {
-  font-family: 'Noto Serif TC', serif;
-  font-size: 16.5px;
-  font-weight: 700;
-  margin-bottom: 3px;
-}
-.loc-tag {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--text-light);
-}
-.loc-desc {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13.5px;
-  color: var(--text-light);
-  line-height: 1.65;
-}
+.loc-card{background:white;border-radius:14px;padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow);border-left:4px solid transparent;transition:transform .2s,box-shadow .2s;cursor:pointer}
+.loc-card:hover{transform:translateX(5px);box-shadow:0 6px 28px rgba(0,0,0,.12)}
+.loc-card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px}
+.loc-emoji{font-size:26px;width:48px;height:48px;border-radius:12px;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.loc-text{flex:1}
+.loc-name{font-family:'Noto Serif TC',serif;font-size:16.5px;font-weight:700;margin-bottom:3px}
+.loc-tag{font-family:'Noto Sans TC',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-light)}
+.loc-desc{font-family:'Noto Sans TC',sans-serif;font-size:13.5px;color:var(--text-light);line-height:1.65}
+
+/* Notes */
+.notes-section{margin-top:12px;border-top:1px dashed rgba(0,0,0,.1);padding-top:12px}
+.notes-toggle{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--text-light);padding:4px 0;transition:color .2s}
+.notes-toggle:hover{color:var(--gold)}
+.notes-toggle .nt-icon{font-size:14px}
+.notes-body{display:none;margin-top:10px}
+.notes-body.open{display:block;animation:rise .2s ease}
+.notes-textarea{width:100%;border:1.5px solid rgba(0,0,0,.12);border-radius:10px;padding:10px 14px;font-family:'Noto Sans TC',sans-serif;font-size:13px;color:var(--text);resize:vertical;min-height:72px;background:#fafafa;transition:border-color .2s;outline:none}
+.notes-textarea:focus{border-color:var(--gold)}
+.notes-textarea::placeholder{color:rgba(0,0,0,.3)}
+.notes-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.notes-save-btn{background:var(--navy);color:white;border:none;border-radius:8px;padding:6px 16px;font-family:'Noto Sans TC',sans-serif;font-size:12px;cursor:pointer;transition:background .2s}
+.notes-save-btn:hover{background:var(--d1)}
+.notes-clear-btn{background:none;border:1.5px solid rgba(0,0,0,.15);border-radius:8px;padding:6px 14px;font-family:'Noto Sans TC',sans-serif;font-size:12px;cursor:pointer;color:var(--text-light);transition:all .2s}
+.notes-clear-btn:hover{border-color:var(--d5);color:var(--d5)}
+.notes-saved-text{display:none;font-family:'Noto Sans TC',sans-serif;font-size:12px;color:#2a8060;margin-top:6px}
+.notes-saved-text.show{display:block}
+.note-preview{font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--gold);margin-top:4px;padding:4px 0;display:none}
+.note-preview.has-note{display:block}
 
 /* Tip boxes */
-.tip-box {
-  display: flex;
-  gap: 14px;
-  border-radius: 12px;
-  padding: 16px 18px;
-  margin: 14px 0;
-  align-items: flex-start;
-}
-.tip-box.expert  { background: #fdf6e3; border: 1px solid #e8d596; }
-.tip-box.photo   { background: #edf6fd; border: 1px solid #a8d4ef; }
-.tip-box.food    { background: #fef2ec; border: 1px solid #f0b89a; }
-.tip-box.night   { background: #f0ecfa; border: 1px solid #c4b0e8; }
-.tip-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
-.tip-inner {}
-.tip-label {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text-light);
-  margin-bottom: 5px;
-}
-.tip-text {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13.5px;
-  line-height: 1.7;
-  color: var(--text);
-}
+.tip-box{display:flex;gap:14px;border-radius:12px;padding:16px 18px;margin:14px 0;align-items:flex-start}
+.tip-box.expert{background:#fdf6e3;border:1px solid #e8d596}
+.tip-box.photo{background:#edf6fd;border:1px solid #a8d4ef}
+.tip-box.food{background:#fef2ec;border:1px solid #f0b89a}
+.tip-box.night{background:#f0ecfa;border:1px solid #c4b0e8}
+.tip-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.tip-label{font-family:'Noto Sans TC',sans-serif;font-size:10.5px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:5px}
+.tip-text{font-family:'Noto Sans TC',sans-serif;font-size:13.5px;line-height:1.7;color:var(--text)}
 
-/* Day 0 — all days overview */
-.all-panel { display: none; }
-.all-panel.active { display: block; animation: rise 0.38s ease; }
-.all-day-row {
-  background: white;
-  border-radius: 14px;
-  padding: 20px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  cursor: pointer;
-  border-left: 4px solid transparent;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.all-day-row:hover { transform: translateX(4px); box-shadow: var(--shadow-lg); }
-.all-day-badge {
-  flex-shrink: 0;
-  width: 52px; height: 52px;
-  border-radius: 14px;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  color: white;
-  font-family: 'Noto Sans TC', sans-serif;
-}
-.all-day-badge span:first-child { font-size: 9px; letter-spacing: 2px; opacity: 0.8; }
-.all-day-badge span:last-child  { font-size: 22px; font-family: 'Cormorant Garamond', serif; font-weight: 600; }
-.all-day-info { flex: 1; }
-.all-day-title { font-weight: 700; font-size: 16px; margin-bottom: 5px; }
-.all-day-stops {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px; color: var(--text-light);
-  line-height: 1.5;
-}
+/* All days overview */
+.all-day-row{background:white;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);display:flex;gap:16px;align-items:flex-start;cursor:pointer;border-left:4px solid transparent;transition:transform .2s,box-shadow .2s}
+.all-day-row:hover{transform:translateX(4px);box-shadow:var(--shadow-lg)}
+.all-day-badge{flex-shrink:0;width:52px;height:52px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;font-family:'Noto Sans TC',sans-serif}
+.all-day-badge span:first-child{font-size:9px;letter-spacing:2px;opacity:.8}
+.all-day-badge span:last-child{font-size:22px;font-family:'Cormorant Garamond',serif;font-weight:600}
+.all-day-info{flex:1}
+.all-day-title{font-weight:700;font-size:16px;margin-bottom:5px}
+.all-day-stops{font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--text-light);line-height:1.5}
+
+/* ─── FOOD & SOUVENIR PANELS ─── */
+.fs-intro{font-family:'Noto Sans TC',sans-serif;font-size:14px;color:var(--text-light);line-height:1.8;margin-bottom:24px}
+.section-label{font-family:'Noto Sans TC',sans-serif;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:3px;color:var(--text-light);margin:28px 0 14px;padding-bottom:8px;border-bottom:1.5px solid rgba(0,0,0,.06);display:flex;align-items:center;gap:8px}
+.section-label em{font-style:normal;font-size:16px}
+
+/* Food card */
+.food-card{background:white;border-radius:14px;padding:18px 20px;margin-bottom:12px;box-shadow:var(--shadow);border-left:4px solid var(--food);transition:transform .2s,box-shadow .2s}
+.food-card:hover{transform:translateX(4px);box-shadow:0 6px 28px rgba(0,0,0,.12)}
+.food-card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px}
+.food-emoji{font-size:28px;width:50px;height:50px;border-radius:12px;background:#fff4f0;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.food-meta{flex:1}
+.food-name{font-family:'Noto Serif TC',serif;font-size:16px;font-weight:700;margin-bottom:3px}
+.food-loc{display:inline-flex;align-items:center;gap:5px;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:var(--text-light);background:var(--cream);border-radius:20px;padding:3px 10px;margin-bottom:6px}
+.food-desc{font-family:'Noto Sans TC',sans-serif;font-size:13px;color:var(--text-light);line-height:1.65;margin-bottom:10px}
+.food-link{display:inline-flex;align-items:center;gap:6px;font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--food);text-decoration:none;border:1.5px solid var(--food);border-radius:20px;padding:4px 14px;transition:all .2s}
+.food-link:hover{background:var(--food);color:white}
+
+/* Souvenir card */
+.souvenir-card{background:white;border-radius:14px;padding:18px 20px;margin-bottom:12px;box-shadow:var(--shadow);border-left:4px solid var(--souvenir);transition:transform .2s,box-shadow .2s}
+.souvenir-card:hover{transform:translateX(4px);box-shadow:0 6px 28px rgba(0,0,0,.12)}
+.souvenir-card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px}
+.souvenir-emoji{font-size:28px;width:50px;height:50px;border-radius:12px;background:#f0f9f0;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.souvenir-meta{flex:1}
+.souvenir-name{font-family:'Noto Serif TC',serif;font-size:16px;font-weight:700;margin-bottom:3px}
+.souvenir-loc{display:inline-flex;align-items:center;gap:5px;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:var(--text-light);background:var(--cream);border-radius:20px;padding:3px 10px;margin-bottom:6px}
+.souvenir-desc{font-family:'Noto Sans TC',sans-serif;font-size:13px;color:var(--text-light);line-height:1.65;margin-bottom:10px}
+.souvenir-link{display:inline-flex;align-items:center;gap:6px;font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--souvenir);text-decoration:none;border:1.5px solid var(--souvenir);border-radius:20px;padding:4px 14px;transition:all .2s}
+.souvenir-link:hover{background:var(--souvenir);color:white}
 
 /* ─── WARNINGS ─── */
-.warnings {
-  background: var(--navy);
-  padding: 52px 20px;
+.warnings{background:var(--navy);padding:52px 20px}
+.warn-inner{max-width:1240px;margin:0 auto}
+.warn-title{font-family:'Noto Serif TC',serif;font-size:20px;font-weight:700;color:white;margin-bottom:30px;display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.12)}
+.warn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.warn-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px;transition:background .2s}
+.warn-card:hover{background:rgba(255,255,255,.1)}
+.warn-emoji{font-size:28px;margin-bottom:12px}
+.warn-card-title{font-family:'Noto Sans TC',sans-serif;font-size:14px;font-weight:500;color:var(--gold-light);margin-bottom:8px}
+.warn-card-body{font-family:'Noto Sans TC',sans-serif;font-size:13px;line-height:1.75;color:rgba(255,255,255,.7)}
+
+footer{background:var(--dark);text-align:center;padding:24px;font-family:'Noto Sans TC',sans-serif;font-size:12px;color:rgba(255,255,255,.3);letter-spacing:1px}
+
+/* ─── FLIGHT & TOUR INFO ─── */
+.trip-info {
+  background: linear-gradient(135deg, #0f1e30 0%, #162840 50%, #0f1e30 100%);
+  padding: 56px 20px 64px;
 }
-.warn-inner { max-width: 1240px; margin: 0 auto; }
-.warn-title {
+.trip-inner { max-width: 1240px; margin: 0 auto; }
+.trip-section-title {
   font-family: 'Noto Serif TC', serif;
   font-size: 20px;
   font-weight: 700;
   color: white;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.trip-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media(max-width:760px) { .trip-grid { grid-template-columns: 1fr; } }
+
+/* Generic card */
+.trip-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 18px;
+  padding: 24px 26px;
+  backdrop-filter: blur(4px);
+  transition: background .2s;
+}
+.trip-card:hover { background: rgba(255,255,255,.08); }
+
+/* Flight card */
+.trip-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.flight-dir-badge {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--d1);
+  color: white;
+  letter-spacing: 1px;
+}
+.return-badge { background: var(--d5); }
+.flight-code {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  flex: 1;
+}
+.flight-tag {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: 1px;
+}
+.flight-route {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
 }
-.warn-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 18px;
-}
-.warn-card {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px;
-  padding: 24px;
-  transition: background 0.2s;
-}
-.warn-card:hover { background: rgba(255,255,255,0.1); }
-.warn-emoji { font-size: 28px; margin-bottom: 12px; }
-.warn-card-title {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+.flight-endpoint { text-align: center; flex: 1; }
+.flight-endpoint.right { }
+.airport-code {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 600;
   color: var(--gold-light);
-  margin-bottom: 8px;
+  line-height: 1.1;
+  letter-spacing: 3px;
 }
-.warn-card-body {
+.airport-name {
   font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13px;
-  line-height: 1.75;
-  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+  color: rgba(255,255,255,.55);
+  margin: 3px 0 10px;
 }
-
-/* ─── FOOTER ─── */
-footer {
-  background: var(--dark);
+.flight-time {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1px;
+}
+.flight-date {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,.45);
+  margin-top: 3px;
+  letter-spacing: 1px;
+}
+.flight-mid {
+  flex: 0 0 auto;
   text-align: center;
-  padding: 24px;
+  min-width: 80px;
+}
+.flight-duration {
   font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px;
-  color: rgba(255,255,255,0.3);
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 6px;
+}
+.flight-line {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+}
+.flight-line span:first-child,
+.flight-line span:last-child {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,.25);
+  display: block;
+  min-width: 12px;
+}
+.plane-icon {
+  color: var(--gold-light);
+  font-size: 16px;
+  display: block;
+}
+.flight-note {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,.35);
+  margin-top: 5px;
   letter-spacing: 1px;
 }
 
-/* ─── LEAFLET CUSTOM ─── */
-.leaflet-popup-content-wrapper {
-  border-radius: 12px !important;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+/* Tour & Meeting cards */
+.tour-card-title {
   font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  letter-spacing: 1px;
 }
-.leaflet-popup-content { margin: 12px 14px !important; }
-.pop-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; font-family: 'Noto Serif TC', serif; }
-.pop-tag { font-size: 11px; color: var(--text-light); letter-spacing: 1px; }
+.tour-rows { display: flex; flex-direction: column; gap: 10px; }
+.tour-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13.5px;
+}
+.tour-label {
+  flex-shrink: 0;
+  width: 52px;
+  color: rgba(255,255,255,.45);
+  font-size: 12px;
+  padding-top: 2px;
+  letter-spacing: .5px;
+}
+.tour-value {
+  color: rgba(255,255,255,.88);
+  line-height: 1.6;
+  flex: 1;
+}
+.tour-value.mono {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: var(--gold-light);
+}
+
+/* Meeting block */
+.meeting-time-block {
+  background: rgba(255,255,255,.06);
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(232,200,130,.25);
+}
+.meeting-time-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.meeting-time-value {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 15px;
+  color: white;
+  letter-spacing: 1px;
+}
+.meeting-time-value strong { color: var(--gold-light); font-size: 18px; }
+.meeting-alert {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12.5px;
+  color: var(--gold-light);
+  background: rgba(232,200,130,.1);
+  border: 1px solid rgba(232,200,130,.25);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-top: 14px;
+  line-height: 1.7;
+}
+
+/* Contact card */
+.contact-list { display: flex; flex-direction: column; gap: 14px; }
+.contact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255,255,255,.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.contact-role {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,.55);
+  flex: 1;
+  min-width: 120px;
+}
+.contact-number {
+  font-family: 'Courier New', monospace;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--gold-light);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color .2s;
+}
+.contact-number:hover { color: white; }
+.leaflet-popup-content-wrapper{border-radius:12px!important;box-shadow:0 4px 20px rgba(0,0,0,.2)!important;font-family:'Noto Sans TC',sans-serif;font-size:13px}
+.leaflet-popup-content{margin:12px 14px!important}
+.pop-title{font-weight:700;font-size:14px;margin-bottom:4px;font-family:'Noto Serif TC',serif}
+.pop-tag{font-size:11px;color:var(--text-light);letter-spacing:1px}
 </style>
 </head>
 <body>
@@ -461,7 +441,7 @@ footer {
   <div class="hero-inner">
     <span class="hero-flag">🗾</span>
     <p class="hero-eyebrow">Japan · Hokkaido</p>
-    <h1>北海道<em>深度之旅</em></h1>
+    <h1>北海道<em>函館遇見櫻飛舞</em></h1>
     <p class="hero-sub">五天四夜 · 精彩行程全攻略</p>
     <div class="badges">
       <span class="badge">🛫 桃園出發</span>
@@ -474,7 +454,7 @@ footer {
 </section>
 
 <!-- ═══ DAY NAV ═══ -->
-<nav class="day-nav" role="navigation">
+<nav class="day-nav">
   <div class="day-nav-inner">
     <button class="day-btn active" data-day="all">🗺 總覽</button>
     <button class="day-btn" data-day="1">Day 1 · 牧場花火</button>
@@ -482,684 +462,798 @@ footer {
     <button class="day-btn" data-day="3">Day 3 · 朝市海洋</button>
     <button class="day-btn" data-day="4">Day 4 · 小樽札幌</button>
     <button class="day-btn" data-day="5">Day 5 · 花之森歸程</button>
+    <button class="day-btn" data-day="food">🍜 美食推薦</button>
+    <button class="day-btn" data-day="souvenir">🎁 特產&amp;零食</button>
   </div>
 </nav>
 
 <!-- ═══ MAIN ═══ -->
 <div class="wrapper">
-  <!-- LEFT: Content panels -->
   <div class="content-col">
 
-    <!-- ── ALL DAYS OVERVIEW ── -->
+    <!-- ─── ALL ─── -->
     <div class="all-panel active" id="panel-all">
-      <div style="margin-bottom:24px;">
-        <p style="font-family:'Noto Sans TC',sans-serif;font-size:14px;color:var(--text-light);line-height:1.8;">
-          點擊下方各天卡片，快速跳至詳細行程；或使用上方導覽列切換每日行程與地圖路線。
-        </p>
+      <div style="margin-bottom:24px;"><p style="font-family:'Noto Sans TC',sans-serif;font-size:14px;color:var(--text-light);line-height:1.8;">點擊下方各天卡片快速跳至詳細行程，或從上方導覽列切換每日行程、美食推薦與特產零食。</p></div>
+      <div class="all-day-row" style="border-left-color:var(--d1)" onclick="switchDay(1)">
+        <div class="all-day-badge" style="background:var(--d1)"><span>DAY</span><span>1</span></div>
+        <div class="all-day-info"><div class="all-day-title">抵達北國，體驗牧場風光與湖畔花火</div><div class="all-day-stops">🛬 新千歲機場 → 🐎 北國馬牧場 → 🌊 洞爺湖花火大會</div></div>
       </div>
-      <div class="all-day-row" style="border-left-color:var(--d1);" onclick="switchDay(1)">
-        <div class="all-day-badge" style="background:var(--d1);"><span>DAY</span><span>1</span></div>
-        <div class="all-day-info">
-          <div class="all-day-title">抵達北國，體驗牧場風光與湖畔花火</div>
-          <div class="all-day-stops">🛬 新千歲機場 → 🐎 北國馬牧場 → 🌊 洞爺湖花火大會</div>
-        </div>
+      <div class="all-day-row" style="border-left-color:var(--d2)" onclick="switchDay(2)">
+        <div class="all-day-badge" style="background:var(--d2)"><span>DAY</span><span>2</span></div>
+        <div class="all-day-info"><div class="all-day-title">西洋星型堡壘與百萬夜景</div><div class="all-day-stops">🌋 昭和新山 → 🌿 大沼公園 → 🧱 金森倉庫 → ⭐ 五稜廓 → ⛪ 女子修道院 → 🌃 函館夜景</div></div>
       </div>
-      <div class="all-day-row" style="border-left-color:var(--d2);" onclick="switchDay(2)">
-        <div class="all-day-badge" style="background:var(--d2);"><span>DAY</span><span>2</span></div>
-        <div class="all-day-info">
-          <div class="all-day-title">西洋星型堡壘與百萬夜景</div>
-          <div class="all-day-stops">🌋 昭和新山 → 🌿 大沼公園 → 🧱 金森倉庫 → ⭐ 五稜廓 → 🌃 函館百萬夜景</div>
-        </div>
+      <div class="all-day-row" style="border-left-color:var(--d3)" onclick="switchDay(3)">
+        <div class="all-day-badge" style="background:var(--d3)"><span>DAY</span><span>3</span></div>
+        <div class="all-day-info"><div class="all-day-title">朝市尋寶與海洋生態之旅</div><div class="all-day-stops">🐟 函館漁市 → 🔥 登別地獄谷 → 🌸 登別櫻花大道 → 🐧 尼克斯海洋公園</div></div>
       </div>
-      <div class="all-day-row" style="border-left-color:var(--d3);" onclick="switchDay(3)">
-        <div class="all-day-badge" style="background:var(--d3);"><span>DAY</span><span>3</span></div>
-        <div class="all-day-info">
-          <div class="all-day-title">朝市尋寶與海洋生態之旅</div>
-          <div class="all-day-stops">🐟 函館漁市 → 🔥 登別地獄谷 → 🌸 登別櫻花大道 → 🐧 尼克斯海洋公園</div>
-        </div>
+      <div class="all-day-row" style="border-left-color:var(--d4)" onclick="switchDay(4)">
+        <div class="all-day-badge" style="background:var(--d4)"><span>DAY</span><span>4</span></div>
+        <div class="all-day-info"><div class="all-day-title">浪漫小樽與札幌市區巡禮</div><div class="all-day-stops">🚣 小樽運河 → ⛩️ 北海道神宮 → 🌳 圓山公園 → 🛍️ 狸小路商店街</div></div>
       </div>
-      <div class="all-day-row" style="border-left-color:var(--d4);" onclick="switchDay(4)">
-        <div class="all-day-badge" style="background:var(--d4);"><span>DAY</span><span>4</span></div>
-        <div class="all-day-info">
-          <div class="all-day-title">浪漫小樽與札幌市區巡禮</div>
-          <div class="all-day-stops">🚣 小樽運河 → ⛩️ 北海道神宮 → 🌳 圓山公園 → 🛍️ 狸小路商店街</div>
-        </div>
-      </div>
-      <div class="all-day-row" style="border-left-color:var(--d5);" onclick="switchDay(5)">
-        <div class="all-day-badge" style="background:var(--d5);"><span>DAY</span><span>5</span></div>
-        <div class="all-day-info">
-          <div class="all-day-title">櫻花之森與滿載而歸</div>
-          <div class="all-day-stops">🌸 莫埃來沼公園 → 🛫 新千歲機場 → 🛬 桃園國際機場</div>
-        </div>
+      <div class="all-day-row" style="border-left-color:var(--d5)" onclick="switchDay(5)">
+        <div class="all-day-badge" style="background:var(--d5)"><span>DAY</span><span>5</span></div>
+        <div class="all-day-info"><div class="all-day-title">櫻花之森與滿載而歸</div><div class="all-day-stops">🌸 莫埃來沼公園 → 🛫 新千歲機場 → 🛬 桃園國際機場</div></div>
       </div>
     </div>
 
-    <!-- ── DAY 1 ── -->
+    <!-- ─── DAY 1 ─── -->
     <div class="day-panel" id="panel-1">
       <div class="day-header">
-        <div class="day-badge" style="background:var(--d1);">
-          <span class="db-day">DAY</span><span class="db-num">1</span>
-        </div>
+        <div class="day-badge" style="background:var(--d1)"><span class="db-day">DAY</span><span class="db-num">1</span></div>
         <div class="day-meta">
           <div class="day-title">抵達北國，體驗牧場風光與湖畔花火</div>
-          <div class="route-flow">
-            <span class="rnode">🛬 新千歲機場</span><span class="rarrow">→</span>
-            <span class="rnode">🐎 北國馬牧場</span><span class="rarrow">→</span>
-            <span class="rnode">🎆 洞爺湖</span>
-          </div>
+          <div class="route-flow"><span class="rnode">🛬 新千歲機場</span><span class="rarrow">→</span><span class="rnode">🐎 北國馬牧場</span><span class="rarrow">→</span><span class="rnode">🎆 洞爺湖</span></div>
         </div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d1);" onclick="focusMarker('d1_0')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">✈️</div>
-          <div class="loc-text">
-            <div class="loc-name">新千歲機場</div>
-            <div class="loc-tag">入境・新千歲空港</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d1)" onclick="focusMarker('d1_0')" id="card-d1_0">
+        <div class="loc-card-top"><div class="loc-emoji">✈️</div><div class="loc-text"><div class="loc-name">新千歲機場</div><div class="loc-tag">入境・新千歲空港</div></div></div>
         <div class="loc-desc">從桃園國際機場出發，抵達北海道門戶——新千歲機場。領取行李後集合，展開精彩的北海道之旅！</div>
-      </div>
-
-      <div class="loc-card" style="border-color:var(--d1);" onclick="focusMarker('d1_1')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🐎</div>
-          <div class="loc-text">
-            <div class="loc-name">北國馬牧場</div>
-            <div class="loc-tag">日高・牧場體驗</div>
+        <div class="notes-section" onclick="event.stopPropagation()">
+          <button class="notes-toggle" onclick="toggleNotes('d1_0')"><span class="nt-icon">📝</span>新增備註</button>
+          <div class="note-preview" id="preview-d1_0"></div>
+          <div class="notes-body" id="notes-d1_0">
+            <textarea class="notes-textarea" id="textarea-d1_0" placeholder="在這裡輸入你的備註，例如：抵達時間、集合地點、注意事項…"></textarea>
+            <div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d1_0')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d1_0')">刪除</button></div>
+            <div class="notes-saved-text" id="saved-d1_0">✓ 備註已儲存</div>
           </div>
         </div>
+      </div>
+      <div class="loc-card" style="border-color:var(--d1)" onclick="focusMarker('d1_1')" id="card-d1_1">
+        <div class="loc-card-top"><div class="loc-emoji">🐎</div><div class="loc-text"><div class="loc-name">北國馬牧場</div><div class="loc-tag">日高・牧場體驗</div></div></div>
         <div class="loc-desc">前往廣闊的北國馬牧場，這裡是培育日本優良賽馬的重要基地。</div>
-      </div>
-
-      <div class="tip-box expert">
-        <div class="tip-icon">🎩</div>
-        <div class="tip-inner">
-          <div class="tip-label">達人推薦 · 在地生活方式</div>
-          <div class="tip-text">北國馬牧場是培育日本優良賽馬的基地。您可以在這裡體驗<strong>騎馬、搭乘馬車或騎自行車</strong>，感受北海道最自然的田野風光，一望無際的牧場景色令人心曠神怡。</div>
+        <div class="tip-box expert"><div class="tip-icon">🎩</div><div class="tip-inner"><div class="tip-label">達人推薦 · 在地生活方式</div><div class="tip-text">北國馬牧場是培育日本優良賽馬的基地。可以在這裡體驗<strong>騎馬、搭乘馬車或騎自行車</strong>，感受北海道最自然的田野風光。</div></div></div>
+        <div class="notes-section" onclick="event.stopPropagation()">
+          <button class="notes-toggle" onclick="toggleNotes('d1_1')"><span class="nt-icon">📝</span>新增備註</button>
+          <div class="note-preview" id="preview-d1_1"></div>
+          <div class="notes-body" id="notes-d1_1"><textarea class="notes-textarea" id="textarea-d1_1" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d1_1')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d1_1')">刪除</button></div><div class="notes-saved-text" id="saved-d1_1">✓ 備註已儲存</div></div>
         </div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d1);" onclick="focusMarker('d1_2')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🎆</div>
-          <div class="loc-text">
-            <div class="loc-name">洞爺湖花火大會</div>
-            <div class="loc-tag">夜間必訪・湖畔花火</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d1)" onclick="focusMarker('d1_2')" id="card-d1_2">
+        <div class="loc-card-top"><div class="loc-emoji">🎆</div><div class="loc-text"><div class="loc-name">洞爺湖花火大會</div><div class="loc-tag">夜間必訪・湖畔花火</div></div></div>
         <div class="loc-desc">入夜後前往洞爺湖，欣賞夢幻的湖上花火大會，煙火倒映湖面，景色如詩如畫。</div>
-      </div>
-
-      <div class="tip-box photo">
-        <div class="tip-icon">📸</div>
-        <div class="tip-inner">
-          <div class="tip-label">最佳拍照點</div>
-          <div class="tip-text"><strong>洞爺湖畔觀湖台</strong>！入夜後的洞爺湖花火大會（預計舉辦期間為 4/28–10/31）絕對是必拍亮點。建議提前占據有利位置，並以湖面倒影為前景拍攝。</div>
+        <div class="tip-box photo"><div class="tip-icon">📸</div><div class="tip-inner"><div class="tip-label">最佳拍照點</div><div class="tip-text"><strong>洞爺湖畔觀湖台</strong>！入夜後的洞爺湖花火大會（預計舉辦期間 4/28–10/31）絕對是必拍亮點。</div></div></div>
+        <div class="notes-section" onclick="event.stopPropagation()">
+          <button class="notes-toggle" onclick="toggleNotes('d1_2')"><span class="nt-icon">📝</span>新增備註</button>
+          <div class="note-preview" id="preview-d1_2"></div>
+          <div class="notes-body" id="notes-d1_2"><textarea class="notes-textarea" id="textarea-d1_2" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d1_2')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d1_2')">刪除</button></div><div class="notes-saved-text" id="saved-d1_2">✓ 備註已儲存</div></div>
         </div>
       </div>
     </div>
 
-    <!-- ── DAY 2 ── -->
+    <!-- ─── DAY 2 ─── -->
     <div class="day-panel" id="panel-2">
       <div class="day-header">
-        <div class="day-badge" style="background:var(--d2);">
-          <span class="db-day">DAY</span><span class="db-num">2</span>
-        </div>
+        <div class="day-badge" style="background:var(--d2)"><span class="db-day">DAY</span><span class="db-num">2</span></div>
         <div class="day-meta">
           <div class="day-title">西洋星型堡壘與百萬夜景</div>
-          <div class="route-flow">
-            <span class="rnode">🌋 昭和新山</span><span class="rarrow">→</span>
-            <span class="rnode">🌿 大沼公園</span><span class="rarrow">→</span>
-            <span class="rnode">🧱 金森倉庫</span><span class="rarrow">→</span>
-            <span class="rnode">⭐ 五稜廓</span><span class="rarrow">→</span>
-            <span class="rnode">⛪ 女子修道院</span><span class="rarrow">→</span>
-            <span class="rnode">🌃 函館夜景</span>
-          </div>
+          <div class="route-flow"><span class="rnode">🌋 昭和新山</span><span class="rarrow">→</span><span class="rnode">🌿 大沼公園</span><span class="rarrow">→</span><span class="rnode">🧱 金森倉庫</span><span class="rarrow">→</span><span class="rnode">⭐ 五稜廓</span><span class="rarrow">→</span><span class="rnode">⛪ 女子修道院</span><span class="rarrow">→</span><span class="rnode">🌃 函館夜景</span></div>
         </div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d2);" onclick="focusMarker('d2_0')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🌋</div>
-          <div class="loc-text">
-            <div class="loc-name">昭和新山</div>
-            <div class="loc-tag">壯士郡・活火山</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d2)" onclick="focusMarker('d2_0')" id="card-d2_0">
+        <div class="loc-card-top"><div class="loc-emoji">🌋</div><div class="loc-text"><div class="loc-name">昭和新山</div><div class="loc-tag">壯士郡・活火山</div></div></div>
         <div class="loc-desc">日本少見的「昭和時代誕生」活火山，1943年從農田突然隆起，至今仍不斷噴出白色蒸氣，景色壯觀神奇。</div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d2_0')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d2_0"></div><div class="notes-body" id="notes-d2_0"><textarea class="notes-textarea" id="textarea-d2_0" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d2_0')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d2_0')">刪除</button></div><div class="notes-saved-text" id="saved-d2_0">✓ 備註已儲存</div></div></div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d2);" onclick="focusMarker('d2_1')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🌿</div>
-          <div class="loc-text">
-            <div class="loc-name">大沼・小沼公園</div>
-            <div class="loc-tag">國定公園・絕景湖泊</div>
-          </div>
-        </div>
-        <div class="loc-desc">由大沼、小沼等多個湖沼構成的自然公園，以駒ヶ岳火山為背景，春季湖畔的倒影景色極為清靈。</div>
+      <div class="loc-card" style="border-color:var(--d2)" onclick="focusMarker('d2_1')" id="card-d2_1">
+        <div class="loc-card-top"><div class="loc-emoji">🌿</div><div class="loc-text"><div class="loc-name">大沼・小沼公園</div><div class="loc-tag">國定公園・絕景湖泊</div></div></div>
+        <div class="loc-desc">由大沼、小沼等多個湖沼構成的自然公園，以駒ヶ岳火山為背景，春季湖畔倒影景色極為清靈。</div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d2_1')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d2_1"></div><div class="notes-body" id="notes-d2_1"><textarea class="notes-textarea" id="textarea-d2_1" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d2_1')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d2_1')">刪除</button></div><div class="notes-saved-text" id="saved-d2_1">✓ 備註已儲存</div></div></div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d2);" onclick="focusMarker('d2_2')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🧱</div>
-          <div class="loc-text">
-            <div class="loc-name">函館金森倉庫群</div>
-            <div class="loc-tag">函館灣・歷史建築</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d2)" onclick="focusMarker('d2_2')" id="card-d2_2">
+        <div class="loc-card-top"><div class="loc-emoji">🧱</div><div class="loc-text"><div class="loc-name">函館金森倉庫群</div><div class="loc-tag">函館灣・歷史建築</div></div></div>
         <div class="loc-desc">建於1909年的紅磚倉庫群，如今已改建為特色商店與餐廳，是函館港口最具代表性的標誌性建築。</div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d2_2')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d2_2"></div><div class="notes-body" id="notes-d2_2"><textarea class="notes-textarea" id="textarea-d2_2" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d2_2')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d2_2')">刪除</button></div><div class="notes-saved-text" id="saved-d2_2">✓ 備註已儲存</div></div></div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d2);" onclick="focusMarker('d2_3')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">⭐</div>
-          <div class="loc-text">
-            <div class="loc-name">五稜廓</div>
-            <div class="loc-tag">函館・西洋式城堡</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d2)" onclick="focusMarker('d2_3')" id="card-d2_3">
+        <div class="loc-card-top"><div class="loc-emoji">⭐</div><div class="loc-text"><div class="loc-name">五稜廓</div><div class="loc-tag">函館・西洋式城堡</div></div></div>
         <div class="loc-desc">日本第一座西洋式城堡，以獨特的五芒星造型令人嘆為觀止。搭乘五稜廓塔俯瞰，更可清楚感受壯闊的幾何之美。</div>
+        <div class="tip-box photo"><div class="tip-icon">📸</div><div class="tip-inner"><div class="tip-label">達人推薦 · 最佳拍照點</div><div class="tip-text">春天時，城廓內有 <strong>1600 棵吉野櫻</strong>盛開，強烈建議從五稜廓塔高處俯瞰這座星型堡壘被粉櫻包圍的絕美景色！</div></div></div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d2_3')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d2_3"></div><div class="notes-body" id="notes-d2_3"><textarea class="notes-textarea" id="textarea-d2_3" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d2_3')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d2_3')">刪除</button></div><div class="notes-saved-text" id="saved-d2_3">✓ 備註已儲存</div></div></div>
       </div>
-
-      <div class="tip-box photo">
-        <div class="tip-icon">📸</div>
-        <div class="tip-inner">
-          <div class="tip-label">達人推薦 · 最佳拍照點</div>
-          <div class="tip-text">五稜廓是日本第一座西洋式城堡。春天時，城廓內有 <strong>1600 棵吉野櫻</strong>盛開，強烈建議從五稜廓塔高處俯瞰這座星型堡壘被粉櫻包圍的絕美景色！</div>
-        </div>
-      </div>
-
-      <div class="loc-card" style="border-color:var(--d2);" onclick="focusMarker('d2_4')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">⛪</div>
-          <div class="loc-text">
-            <div class="loc-name">女子修道院（トラピスチヌ修道院）</div>
-            <div class="loc-tag">函館・宗教建築</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d2)" onclick="focusMarker('d2_4')" id="card-d2_4">
+        <div class="loc-card-top"><div class="loc-emoji">⛪</div><div class="loc-text"><div class="loc-name">女子修道院（トラピスチヌ修道院）</div><div class="loc-tag">函館・宗教建築</div></div></div>
         <div class="loc-desc">日本最初的女子修道院，建於1898年，法式哥德式外觀典雅莊重，院內庭園四季皆有花卉盛開，散發寧靜神聖的氛圍。</div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d2_4')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d2_4"></div><div class="notes-body" id="notes-d2_4"><textarea class="notes-textarea" id="textarea-d2_4" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d2_4')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d2_4')">刪除</button></div><div class="notes-saved-text" id="saved-d2_4">✓ 備註已儲存</div></div></div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d2);" onclick="focusMarker('d2_5')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🌃</div>
-          <div class="loc-text">
-            <div class="loc-name">函館山百萬夜景</div>
-            <div class="loc-tag">函館山・世界三大夜景</div>
-          </div>
-        </div>
-        <div class="loc-desc">搭乘纜車直上函館山頂，俯瞰函館灣與津輕海峽的璀璨燈火，這裡的夜景與義大利那不勒斯、香港並列「世界三大夜景」。</div>
-      </div>
-
-      <div class="tip-box night">
-        <div class="tip-icon">✨</div>
-        <div class="tip-inner">
-          <div class="tip-label">夜間必訪</div>
-          <div class="tip-text">搭乘纜車上函館山，夜景被譽為「<strong>百萬夜景</strong>」，與義大利那不勒斯、香港並列世界三大夜景。建議黃昏前上山，同時欣賞日落與入夜後的點燈瞬間。</div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d2)" onclick="focusMarker('d2_5')" id="card-d2_5">
+        <div class="loc-card-top"><div class="loc-emoji">🌃</div><div class="loc-text"><div class="loc-name">函館山百萬夜景</div><div class="loc-tag">函館山・世界三大夜景</div></div></div>
+        <div class="loc-desc">搭乘纜車直上函館山頂，俯瞰函館灣與津輕海峽的璀璨燈火，與義大利那不勒斯、香港並列「世界三大夜景」。</div>
+        <div class="tip-box night"><div class="tip-icon">✨</div><div class="tip-inner"><div class="tip-label">夜間必訪</div><div class="tip-text">建議<strong>黃昏前上山</strong>，同時欣賞日落與入夜後的點燈瞬間，感受函館最浪漫的時刻。</div></div></div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d2_5')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d2_5"></div><div class="notes-body" id="notes-d2_5"><textarea class="notes-textarea" id="textarea-d2_5" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d2_5')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d2_5')">刪除</button></div><div class="notes-saved-text" id="saved-d2_5">✓ 備註已儲存</div></div></div>
       </div>
     </div>
 
-    <!-- ── DAY 3 ── -->
+    <!-- ─── DAY 3 ─── -->
     <div class="day-panel" id="panel-3">
       <div class="day-header">
-        <div class="day-badge" style="background:var(--d3);">
-          <span class="db-day">DAY</span><span class="db-num">3</span>
-        </div>
+        <div class="day-badge" style="background:var(--d3)"><span class="db-day">DAY</span><span class="db-num">3</span></div>
         <div class="day-meta">
           <div class="day-title">朝市尋寶與海洋生態之旅</div>
-          <div class="route-flow">
-            <span class="rnode">🐟 函館漁市</span><span class="rarrow">→</span>
-            <span class="rnode">🔥 登別地獄谷</span><span class="rarrow">→</span>
-            <span class="rnode">🌸 登別櫻花大道</span><span class="rarrow">→</span>
-            <span class="rnode">🐧 尼克斯海洋公園</span>
-          </div>
+          <div class="route-flow"><span class="rnode">🐟 函館漁市</span><span class="rarrow">→</span><span class="rnode">🔥 登別地獄谷</span><span class="rarrow">→</span><span class="rnode">🌸 登別櫻花大道</span><span class="rarrow">→</span><span class="rnode">🐧 尼克斯海洋公園</span></div>
         </div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d3);" onclick="focusMarker('d3_0')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🦐</div>
-          <div class="loc-text">
-            <div class="loc-name">函館漁市（朝市）</div>
-            <div class="loc-tag">函館朝市・早市</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d3)" onclick="focusMarker('d3_0')" id="card-d3_0">
+        <div class="loc-card-top"><div class="loc-emoji">🦐</div><div class="loc-text"><div class="loc-name">函館漁市（朝市）</div><div class="loc-tag">函館朝市・早市</div></div></div>
         <div class="loc-desc">一早前往函館朝市，在充滿活力的市場中感受道南漁港的生命力，現撈海鮮、農產蔬果應有盡有。</div>
+        <div class="tip-box food"><div class="tip-icon">🍣</div><div class="tip-inner"><div class="tip-label">達人推薦 · 在地美食</div><div class="tip-text">可以在這裡找到最新鮮的<strong>海產、醬菜和當季蔬果</strong>，別忘了留肚子嚐嚐這裡的海鮮蓋飯！</div></div></div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d3_0')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d3_0"></div><div class="notes-body" id="notes-d3_0"><textarea class="notes-textarea" id="textarea-d3_0" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d3_0')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d3_0')">刪除</button></div><div class="notes-saved-text" id="saved-d3_0">✓ 備註已儲存</div></div></div>
       </div>
-
-      <div class="tip-box food">
-        <div class="tip-icon">🍣</div>
-        <div class="tip-inner">
-          <div class="tip-label">達人推薦 · 在地美食</div>
-          <div class="tip-text">函館漁市（朝市）是體驗在地活力的最佳地點。您可以在這裡找到最新鮮的<strong>海產、醬菜和當季蔬果</strong>，別忘了留點肚子嚐嚐這裡的海鮮蓋飯！</div>
-        </div>
-      </div>
-
-      <div class="loc-card" style="border-color:var(--d3);" onclick="focusMarker('d3_1')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🔥</div>
-          <div class="loc-text">
-            <div class="loc-name">登別地獄谷</div>
-            <div class="loc-tag">地獄谷・地熱奇景</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d3)" onclick="focusMarker('d3_1')" id="card-d3_1">
+        <div class="loc-card-top"><div class="loc-emoji">🔥</div><div class="loc-text"><div class="loc-name">登別地獄谷</div><div class="loc-tag">地獄谷・地熱奇景</div></div></div>
         <div class="loc-desc">登別溫泉鄉旁的壯觀地熱奇景，直徑450公尺的火山爆裂口終日冒出白色硫磺蒸氣，猶如置身地獄，震撼人心。</div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d3_1')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d3_1"></div><div class="notes-body" id="notes-d3_1"><textarea class="notes-textarea" id="textarea-d3_1" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d3_1')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d3_1')">刪除</button></div><div class="notes-saved-text" id="saved-d3_1">✓ 備註已儲存</div></div></div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d3);" onclick="focusMarker('d3_2')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🌸</div>
-          <div class="loc-text">
-            <div class="loc-name">登別櫻花大道</div>
-            <div class="loc-tag">登別・春季絕景</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d3)" onclick="focusMarker('d3_2')" id="card-d3_2">
+        <div class="loc-card-top"><div class="loc-emoji">🌸</div><div class="loc-text"><div class="loc-name">登別櫻花大道</div><div class="loc-tag">登別・春季絕景</div></div></div>
         <div class="loc-desc">春季限定美景！登別的櫻花大道在4月底至5月初盛放，粉色花瓣鋪天蓋地，漫步其中浪漫至極。</div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d3_2')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d3_2"></div><div class="notes-body" id="notes-d3_2"><textarea class="notes-textarea" id="textarea-d3_2" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d3_2')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d3_2')">刪除</button></div><div class="notes-saved-text" id="saved-d3_2">✓ 備註已儲存</div></div></div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d3);" onclick="focusMarker('d3_3')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🐧</div>
-          <div class="loc-text">
-            <div class="loc-name">登別尼克斯海洋公園</div>
-            <div class="loc-tag">登別・海洋樂園</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d3)" onclick="focusMarker('d3_3')" id="card-d3_3">
+        <div class="loc-card-top"><div class="loc-emoji">🐧</div><div class="loc-text"><div class="loc-name">登別尼克斯海洋公園</div><div class="loc-tag">登別・海洋樂園</div></div></div>
         <div class="loc-desc">以北歐丹麥城堡為主題的海洋公園，飼養多種海洋生物，並定期舉辦精彩表演秀。</div>
-      </div>
-
-      <div class="tip-box photo">
-        <div class="tip-icon">📸</div>
-        <div class="tip-inner">
-          <div class="tip-label">必拍亮點</div>
-          <div class="tip-text">尼克斯海洋公園的<strong>企鵝閱兵遊行</strong>，可愛逗趣的模樣超級好拍！建議提前查詢當日遊行時間，確保最佳拍攝位置。</div>
-        </div>
+        <div class="tip-box photo"><div class="tip-icon">📸</div><div class="tip-inner"><div class="tip-label">必拍亮點</div><div class="tip-text">尼克斯海洋公園的<strong>企鵝閱兵遊行</strong>，可愛逗趣的模樣超級好拍！建議提前查詢當日遊行時間。</div></div></div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d3_3')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d3_3"></div><div class="notes-body" id="notes-d3_3"><textarea class="notes-textarea" id="textarea-d3_3" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d3_3')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d3_3')">刪除</button></div><div class="notes-saved-text" id="saved-d3_3">✓ 備註已儲存</div></div></div>
       </div>
     </div>
 
-    <!-- ── DAY 4 ── -->
+    <!-- ─── DAY 4 ─── -->
     <div class="day-panel" id="panel-4">
       <div class="day-header">
-        <div class="day-badge" style="background:var(--d4);">
-          <span class="db-day">DAY</span><span class="db-num">4</span>
-        </div>
+        <div class="day-badge" style="background:var(--d4)"><span class="db-day">DAY</span><span class="db-num">4</span></div>
         <div class="day-meta">
           <div class="day-title">浪漫小樽與札幌市區巡禮</div>
-          <div class="route-flow">
-            <span class="rnode">🚣 小樽運河</span><span class="rarrow">→</span>
-            <span class="rnode">🏺 北一硝子館</span><span class="rarrow">→</span>
-            <span class="rnode">🎵 音樂鐘博物館</span><span class="rarrow">→</span>
-            <span class="rnode">🌳 中島公園</span><span class="rarrow">→</span>
-            <span class="rnode">⛩️ 北海道神宮</span><span class="rarrow">→</span>
-            <span class="rnode">🛍️ 狸小路</span>
-          </div>
+          <div class="route-flow"><span class="rnode">🚣 小樽運河</span><span class="rarrow">→</span><span class="rnode">🏺 北一硝子館</span><span class="rarrow">→</span><span class="rnode">🎵 音樂鐘博物館</span><span class="rarrow">→</span><span class="rnode">🌳 中島公園</span><span class="rarrow">→</span><span class="rnode">⛩️ 北海道神宮</span><span class="rarrow">→</span><span class="rnode">🛍️ 狸小路</span></div>
         </div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d4);" onclick="focusMarker('d4_0')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🚣</div>
-          <div class="loc-text">
-            <div class="loc-name">小樽運河</div>
-            <div class="loc-tag">小樽・浪漫水道</div>
-          </div>
-        </div>
-        <div class="loc-desc">建於大正時代的歷史運河，兩岸古典石造倉庫與煤氣燈倒映水中，是全日本最具浪漫氛圍的街道之一。</div>
+      <div class="loc-card" style="border-color:var(--d4)" onclick="focusMarker('d4_0')" id="card-d4_0">
+        <div class="loc-card-top"><div class="loc-emoji">🚣</div><div class="loc-text"><div class="loc-name">小樽運河 &amp; 堺町通商店街</div><div class="loc-tag">小樽・浪漫水道</div></div></div>
+        <div class="loc-desc">建於大正時代的歷史運河，兩岸古典石造倉庫與煤氣燈倒映水中，是全日本最具浪漫氛圍的街道之一。附近的北一硝子館與音樂鐘博物館也值得細細品味。</div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d4_0')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d4_0"></div><div class="notes-body" id="notes-d4_0"><textarea class="notes-textarea" id="textarea-d4_0" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d4_0')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d4_0')">刪除</button></div><div class="notes-saved-text" id="saved-d4_0">✓ 備註已儲存</div></div></div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d4);" onclick="focusMarker('d4_0')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🏺</div>
-          <div class="loc-text">
-            <div class="loc-name">北一硝子館 & 音樂鐘博物館</div>
-            <div class="loc-tag">小樽・工藝之城</div>
-          </div>
-        </div>
-        <div class="loc-desc">小樽自古以來是北海道的玻璃工藝重鎮。北一硝子館展示各式精美玻璃製品；音樂鐘博物館收藏來自世界各地的古董音樂盒與鐘錶，值得細細品味。</div>
+      <div class="loc-card" style="border-color:var(--d4)" onclick="focusMarker('d4_1')" id="card-d4_1">
+        <div class="loc-card-top"><div class="loc-emoji">⛩️</div><div class="loc-text"><div class="loc-name">北海道神宮 &amp; 圓山公園</div><div class="loc-tag">札幌・精神地標</div></div></div>
+        <div class="loc-desc">北海道的精神象徵，建立於1869年。神宮內高聳的神木成排，莊嚴肅穆，春天時與鄰近的圓山公園連成一片如夢似幻的賞花秘境。</div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d4_1')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d4_1"></div><div class="notes-body" id="notes-d4_1"><textarea class="notes-textarea" id="textarea-d4_1" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d4_1')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d4_1')">刪除</button></div><div class="notes-saved-text" id="saved-d4_1">✓ 備註已儲存</div></div></div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d4);" onclick="focusMarker('d4_1')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">⛩️</div>
-          <div class="loc-text">
-            <div class="loc-name">北海道神宮 & 圓山公園</div>
-            <div class="loc-tag">札幌・精神地標</div>
-          </div>
-        </div>
-        <div class="loc-desc">北海道的精神象徵，建立於1869年。神宮內高聳的北海道神木成排，莊嚴肅穆，春天時與鄰近的圓山公園連成一片如夢似幻的賞花秘境。</div>
-      </div>
-
-      <div class="loc-card" style="border-color:var(--d4);" onclick="focusMarker('d4_2')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🛍️</div>
-          <div class="loc-text">
-            <div class="loc-name">狸小路商店街</div>
-            <div class="loc-tag">札幌・購物天堂</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d4)" onclick="focusMarker('d4_2')" id="card-d4_2">
+        <div class="loc-card-top"><div class="loc-emoji">🛍️</div><div class="loc-text"><div class="loc-name">狸小路商店街</div><div class="loc-tag">札幌・購物天堂</div></div></div>
         <div class="loc-desc">全長約900公尺的全天候拱頂商店街，匯集藥妝、伴手禮、餐廳與娛樂設施，是下班後最佳消遣地點。</div>
-      </div>
-
-      <div class="tip-box expert">
-        <div class="tip-icon">💴</div>
-        <div class="tip-inner">
-          <div class="tip-label">達人推薦 · 省錢購物小撇步</div>
-          <div class="tip-text">狸小路有各式藥妝店與伴手禮店，建議先<strong>比價</strong>，並善用<strong>退稅服務</strong>（免稅門檻為市價 20 萬日圓以內之物品，依各店規定為主）。</div>
-        </div>
-      </div>
-
-      <div class="tip-box food">
-        <div class="tip-icon">🦀</div>
-        <div class="tip-inner">
-          <div class="tip-label">必吃美食 · 今日晚餐</div>
-          <div class="tip-text">今晚將享用<strong>三大螃蟹吃到飽</strong>大餐——松葉蟹、花蟹、毛蟹（栗螃蟹），搭配烤肉或涮涮鍋，豪華盛宴千萬別錯過！</div>
-        </div>
+        <div class="tip-box expert"><div class="tip-icon">💴</div><div class="tip-inner"><div class="tip-label">達人推薦 · 省錢購物小撇步</div><div class="tip-text">建議先<strong>比價</strong>，並善用<strong>退稅服務</strong>（免稅門檻市價 20 萬日圓以內，依各店規定為主）。</div></div></div>
+        <div class="tip-box food"><div class="tip-icon">🦀</div><div class="tip-inner"><div class="tip-label">必吃美食 · 今日晚餐</div><div class="tip-text">今晚享用<strong>三大螃蟹吃到飽</strong>——松葉蟹、花蟹、毛蟹，搭配烤肉或涮涮鍋，豪華盛宴千萬別錯過！</div></div></div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d4_2')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d4_2"></div><div class="notes-body" id="notes-d4_2"><textarea class="notes-textarea" id="textarea-d4_2" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d4_2')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d4_2')">刪除</button></div><div class="notes-saved-text" id="saved-d4_2">✓ 備註已儲存</div></div></div>
       </div>
     </div>
 
-    <!-- ── DAY 5 ── -->
+    <!-- ─── DAY 5 ─── -->
     <div class="day-panel" id="panel-5">
       <div class="day-header">
-        <div class="day-badge" style="background:var(--d5);">
-          <span class="db-day">DAY</span><span class="db-num">5</span>
-        </div>
+        <div class="day-badge" style="background:var(--d5)"><span class="db-day">DAY</span><span class="db-num">5</span></div>
         <div class="day-meta">
           <div class="day-title">櫻花之森與滿載而歸</div>
-          <div class="route-flow">
-            <span class="rnode">🌸 莫埃來沼公園</span><span class="rarrow">→</span>
-            <span class="rnode">✈️ 新千歲機場</span><span class="rarrow">→</span>
-            <span class="rnode">🛬 桃園國際機場</span>
-          </div>
+          <div class="route-flow"><span class="rnode">🌸 莫埃來沼公園</span><span class="rarrow">→</span><span class="rnode">✈️ 新千歲機場</span><span class="rarrow">→</span><span class="rnode">🛬 桃園國際機場</span></div>
         </div>
       </div>
-
-      <div class="loc-card" style="border-color:var(--d5);" onclick="focusMarker('d5_0')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">🌸</div>
-          <div class="loc-text">
-            <div class="loc-name">莫埃來沼公園（櫻花之森）</div>
-            <div class="loc-tag">札幌東區・藝術公園</div>
-          </div>
-        </div>
-        <div class="loc-desc">由雕塑大師野口勇（Isamu Noguchi）設計的189公頃大型藝術公園，整座公園本身即是一件大地藝術作品。春季時，園內的吉野櫻盛放，美不勝收，是告別北海道的最美句點。</div>
+      <div class="loc-card" style="border-color:var(--d5)" onclick="focusMarker('d5_0')" id="card-d5_0">
+        <div class="loc-card-top"><div class="loc-emoji">🌸</div><div class="loc-text"><div class="loc-name">莫埃來沼公園（櫻花之森）</div><div class="loc-tag">札幌東區・藝術公園</div></div></div>
+        <div class="loc-desc">由雕塑大師野口勇設計的189公頃大型藝術公園，春季吉野櫻盛放，是告別北海道的最美句點。</div>
+        <div class="tip-box photo"><div class="tip-icon">🌿</div><div class="tip-inner"><div class="tip-label">春季限定</div><div class="tip-text">4月下旬至5月初為最佳賞花期，建議<strong>早晨前往</strong>避開人潮，在波浪起伏的大地藝術中漫步賞花。</div></div></div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d5_0')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d5_0"></div><div class="notes-body" id="notes-d5_0"><textarea class="notes-textarea" id="textarea-d5_0" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d5_0')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d5_0')">刪除</button></div><div class="notes-saved-text" id="saved-d5_0">✓ 備註已儲存</div></div></div>
       </div>
-
-      <div class="tip-box photo">
-        <div class="tip-icon">🌿</div>
-        <div class="tip-inner">
-          <div class="tip-label">春季限定</div>
-          <div class="tip-text">莫埃來沼公園的「<strong>櫻花之森</strong>」是札幌賞櫻熱點，4月下旬至5月初為最佳賞花期，建議早晨前往避開人潮，在波浪起伏的大地藝術中漫步賞花。</div>
-        </div>
-      </div>
-
-      <div class="loc-card" style="border-color:var(--d5);" onclick="focusMarker('d5_1')">
-        <div class="loc-card-top">
-          <div class="loc-emoji">✈️</div>
-          <div class="loc-text">
-            <div class="loc-name">新千歲機場 → 桃園國際機場</div>
-            <div class="loc-tag">返程・歸程</div>
-          </div>
-        </div>
+      <div class="loc-card" style="border-color:var(--d5)" onclick="focusMarker('d5_1')" id="card-d5_1">
+        <div class="loc-card-top"><div class="loc-emoji">✈️</div><div class="loc-text"><div class="loc-name">新千歲機場 → 桃園國際機場</div><div class="loc-tag">返程・歸程</div></div></div>
         <div class="loc-desc">行程最後，於新千歲機場辦理登機手續，滿載北海道的美好回憶與戰利品，平安返台！</div>
+        <div class="tip-box expert" style="background:#fff3e0;border-color:#ffcc80"><div class="tip-icon">⚠️</div><div class="tip-inner"><div class="tip-label">溫馨提醒</div><div class="tip-text">回程託運行李<strong>每人限一件，限重 23 公斤</strong>，請於出發前整理好行李！</div></div></div>
+        <div class="notes-section" onclick="event.stopPropagation()"><button class="notes-toggle" onclick="toggleNotes('d5_1')"><span class="nt-icon">📝</span>新增備註</button><div class="note-preview" id="preview-d5_1"></div><div class="notes-body" id="notes-d5_1"><textarea class="notes-textarea" id="textarea-d5_1" placeholder="在這裡輸入你的備註…"></textarea><div class="notes-actions"><button class="notes-save-btn" onclick="saveNote('d5_1')">💾 儲存備註</button><button class="notes-clear-btn" onclick="clearNote('d5_1')">刪除</button></div><div class="notes-saved-text" id="saved-d5_1">✓ 備註已儲存</div></div></div>
+      </div>
+    </div>
+
+    <!-- ─── FOOD PANEL ─── -->
+    <div class="food-panel" id="panel-food">
+      <div class="day-header">
+        <div class="day-badge" style="background:var(--food);width:60px;height:60px"><span class="db-day" style="font-size:22px">🍜</span></div>
+        <div class="day-meta"><div class="day-title">美食推薦</div><p class="fs-intro" style="margin:8px 0 0">依照行程景點整理的必吃餐廳清單，附餐廳名稱、所在地點與推薦來源。</p></div>
       </div>
 
-      <div class="tip-box expert" style="background:#fff3e0;border-color:#ffcc80;">
-        <div class="tip-icon">⚠️</div>
-        <div class="tip-inner">
-          <div class="tip-label">溫馨提醒</div>
-          <div class="tip-text">回程託運行李<strong>每人限一件，限重 23 公斤</strong>，請於出發前整理好行李，避免超重產生額外費用。機場商店的伴手禮也算在內，請提前預留空間！</div>
-        </div>
+      <div class="section-label"><em>🌊</em> Day 1 · 洞爺湖周邊</div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🍦</div><div class="food-meta"><div class="food-name">Lake Hill Farm（レイクヒルファーム）</div><div class="food-loc">📍 洞爺湖環湖公路</div></div></div>
+        <div class="food-desc">洞爺湖環湖公路上超人氣冰淇淋小屋，使用自家牧場牛奶製作超過20種口味的義式手工冰淇淋，還有麵包泡芙與手工起司。農場後有一片大草原可以餵羊，是絕佳的親子景點兼美食停靠站。</div>
+        <a class="food-link" href="https://mimigo.tw/hokkaido-trips/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+
+      <div class="section-label"><em>🌋</em> Day 2 · 函館地區</div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🍔</div><div class="food-meta"><div class="food-name">幸運小丑漢堡（ラッキーピエロ）</div><div class="food-loc">📍 函館市内17間分店・金森倉庫旁即有</div></div></div>
+        <div class="food-desc">函館限定連鎖漢堡店，曾多次被票選為「全日本最好吃漢堡」！招牌必點「中華雞腿堡」，整塊去骨雞腿排油炸後沾裹酸甜糖醋醬汁，口味獨特令人難忘。每間店裝潢風格截然不同，本身就是一大賣點。</div>
+        <a class="food-link" href="https://www.funliday.com/posts/hakodate-cuisine-top12/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🍜</div><div class="food-meta"><div class="food-name">味彩拉麵 あじさい（函館味彩本店）</div><div class="food-loc">📍 函館市本町 ／ 五稜廓附近</div></div></div>
+        <div class="food-desc">函館鹽味拉麵的代表名店，開業於1930年。透明的昆布雞骨湯頭清澈甘甜、清爽無負擔，是與札幌味噌、旭川醬油並列「北海道三大拉麵」的函館鹽味拉麵最佳體驗地點。</div>
+        <a class="food-link" href="https://bobbyfun.tw/2024-02-05-2877/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🍱</div><div class="food-meta"><div class="food-name">HASEGAWA STORE（ハセガワストア）</div><div class="food-loc">📍 函館駅前店 / 函館市若松町14-10</div></div></div>
+        <div class="food-desc">函館在地人最愛的平價連鎖超商，招牌是現烤的「照燒雞肉便當」（其實是烤豬肉串，這是北海道南部特色）。提供醬汁、鹽烤、甜辣、味噌等五種口味，現點現做、熱騰騰香氣四溢。</div>
+        <a class="food-link" href="https://www.funliday.com/posts/hakodate-cuisine-top12/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+
+      <div class="section-label"><em>🐟</em> Day 3 · 函館朝市 &amp; 登別</div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🦔</div><div class="food-meta"><div class="food-name">村上海膽 函館本店</div><div class="food-loc">📍 函館朝市・蓋飯橫丁市場內</div></div></div>
+        <div class="food-desc">朝市內專賣海膽料理的人氣名店，採用不加明礬的海膽，口感更鮮甜濃郁。必點「特製雙色海膽丼」，一次品嚐兩種不同品種的海膽，新鮮度滿分，讓味蕾大滿足。</div>
+        <a class="food-link" href="https://www.funliday.com/posts/hakodate-cuisine-top12/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🐟</div><div class="food-meta"><div class="food-name">きくよ食堂（KIKUYO食堂）</div><div class="food-loc">📍 函館朝市・蓋飯橫丁市場内 / 若松町11-15</div></div></div>
+        <div class="food-desc">朝市內最熱門的海鮮丼人氣名店。必點「元祖函館巴丼」，鋪滿海膽、干貝、鮭魚卵超奢侈，也有三色丼、帝王蟹料理，每款海鮮丼上桌都新鮮澎湃，重點是價格也算合理！</div>
+        <a class="food-link" href="https://bobbyfun.tw/2024-02-05-2877/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🦑</div><div class="food-meta"><div class="food-name">函館朝市・駅二市場 釣烏賊體驗</div><div class="food-loc">📍 函館駅二市場内</div></div></div>
+        <div class="food-desc">函館朝市超人氣體驗！可以在這裡親手釣烏賊，釣到後現場直接料理成生魚片食用。活跳跳的烏賊透明有光澤，沾山葵醬油食用甜味十足，是函館獨特的在地飲食文化體驗。</div>
+        <a class="food-link" href="https://mimigo.tw/hakodate-morning-market/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+
+      <div class="section-label"><em>🚣</em> Day 4 · 小樽</div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🍗</div><div class="food-meta"><div class="food-name">若雞時代 なると本店</div><div class="food-loc">📍 小樽市稲穂3-16-13（JR小樽站步行約5分鐘）</div></div></div>
+        <div class="food-desc">小樽靈魂美食代表！外香酥、內多汁的「炸半隻雞」是鎮店之寶，份量豪邁建議多人分食。也有附湯飯的若雞定食與小樽名物Zangi丼，店內有上百個座席，翻桌率快、等待時間相對短。</div>
+        <a class="food-link" href="https://tasting-japan.com/archives/4786" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🍣</div><div class="food-meta"><div class="food-name">小樽政壽司 本店（おたる政寿司）</div><div class="food-loc">📍 小樽市花園1-1-1（JR小樽站步行約5分鐘）</div></div></div>
+        <div class="food-desc">創業80多年的老字號壽司店，也是日劇《將太的壽司》取景地。招牌「元祖烏賊素麵」以纖細如絲的生烏賊拌入海膽與特製醬汁，極為鮮美。建議官網提前預約，現場等候時間較長。</div>
+        <a class="food-link" href="https://www.funliday.com/posts/otaru-food-top10/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🍺</div><div class="food-meta"><div class="food-name">小樽倉庫No.1</div><div class="food-loc">📍 小樽市港町5-4（JR小樽站步行約10分鐘）</div></div></div>
+        <div class="food-desc">改建自復古紅磚倉庫的精釀啤酒餐廳，1995年創立的小樽第一家在地啤酒廠。按照德國啤酒純度法釀造，推薦搭配德式香腸拼盤，在古典建築中感受面對小樽運河的浪漫氛圍。</div>
+        <a class="food-link" href="https://tasting-japan.com/archives/4786" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+
+      <div class="section-label"><em>🏙️</em> Day 4 · 札幌</div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🍛</div><div class="food-meta"><div class="food-name">GARAKU（ガラク）</div><div class="food-loc">📍 札幌市中央区南2条西2丁目6-1 B1F（狸小路附近）</div></div></div>
+        <div class="food-desc">札幌湯咖哩名店，濃郁香氣十足的湯底搭配整塊雞腿肉與大量蔬菜。支援LINE遠端取號，邊逛邊等超方便。台北也有分店，但本店味道仍更勝一籌，有機會務必嚐嚐正宗的！</div>
+        <a class="food-link" href="https://www.daisyyohoho.com/hokkaido-delicious/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🐑</div><div class="food-meta"><div class="food-name">達摩成吉思汗烤肉（成吉思汗だるま）</div><div class="food-loc">📍 本店：札幌市中央区南5条西4 クリスタルビル 1F</div></div></div>
+        <div class="food-desc">北海道成吉思汗（烤羊肉）最具代表性的連鎖名店之一，每到用餐時間座無虛席。不醃漬直接烤的羊肉少有羊騷味，搭配洋蔥和特調醬汁，炭火香氣撲鼻令人難忘，搭配生啤酒更是絕配！</div>
+        <a class="food-link" href="https://www.kkday.com/zh-tw/blog/14094/asia-japan-sapporo-must-eat" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="food-card">
+        <div class="food-card-top"><div class="food-emoji">🦀</div><div class="food-meta"><div class="food-name">札幌螃蟹本家（札幌かに本家）</div><div class="food-loc">📍 札幌市中央区 / JR札幌站南口步行5分鐘</div></div></div>
+        <div class="food-desc">七層樓的高級螃蟹料理旗艦店，460席，提供包廂與大廳座位。主打北海道新鮮帝王蟹、毛蟹與松葉蟹，菜色涵蓋刺身、炭火烤蟹、蟹鍋火鍋、蟹壽司等，是享受頂級螃蟹料理的首選。建議提前預約。</div>
+        <a class="food-link" href="https://travel.yam.com/article/139025" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+    </div>
+
+    <!-- ─── SOUVENIR PANEL ─── -->
+    <div class="souvenir-panel" id="panel-souvenir">
+      <div class="day-header">
+        <div class="day-badge" style="background:var(--souvenir);width:60px;height:60px"><span class="db-day" style="font-size:22px">🎁</span></div>
+        <div class="day-meta"><div class="day-title">特產 &amp; 零食伴手禮</div><p class="fs-intro" style="margin:8px 0 0">依照景點整理的必買特產、零食與伴手禮，可當場享用或帶回家送禮自用。</p></div>
+      </div>
+
+      <div class="section-label"><em>🌋</em> Day 2 · 函館地區</div>
+      <div class="souvenir-card">
+        <div class="souvenir-card-top"><div class="souvenir-emoji">🍰</div><div class="souvenir-meta"><div class="souvenir-name">Pastry Snaffle's 起司蛋糕 &amp; 巧克力歐姆蕾</div><div class="souvenir-loc">📍 函館駅前店 / 末広町13-9</div></div></div>
+        <div class="souvenir-desc">函館必買伴手禮代表！招牌「Cheese Omelet」巧克力歐姆蕾蛋糕連續七年獲得比利時MONDE SELECTION最高金賞。口感輕盈綿密，甜而不膩，盒裝適合帶回台灣，店內也提供可站著吃的Cheese Bar。</div>
+        <a class="souvenir-link" href="https://www.kkday.com/zh-tw/blog/40567/asia-japan-hokkaido-hakodate-food" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="souvenir-card">
+        <div class="souvenir-card-top"><div class="souvenir-emoji">🍛</div><div class="souvenir-meta"><div class="souvenir-name">五島軒 咖哩料理包</div><div class="souvenir-loc">📍 函館市内多間分店 / 1879年創業老字號</div></div></div>
+        <div class="souvenir-desc">函館超過140年歷史的老字號西洋料理店，招牌咖哩口味獨特濃郁令人上癮，用餐後順手帶幾包咖哩料理包回家的遊客絡繹不絕。常溫保存方便攜帶，是函館限定的家用伴手禮首選。</div>
+        <a class="souvenir-link" href="https://matcha-jp.com/tw/2597" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="souvenir-card">
+        <div class="souvenir-card-top"><div class="souvenir-emoji">🎪</div><div class="souvenir-meta"><div class="souvenir-name">金森倉庫群 限定雜貨 &amp; 北海道伴手禮</div><div class="souvenir-loc">📍 函館市末広町14-12</div></div></div>
+        <div class="souvenir-desc">金森紅磚倉庫群內設有多間特色商店，販售時尚服飾、北海道民藝品、在地甜點與生活雜貨，應有盡有。也可以在咖啡廳品嚐用新鮮牛奶製成的冰淇淋，邊逛邊吃超愜意。</div>
+        <a class="souvenir-link" href="https://matcha-jp.com/tw/2597" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+
+      <div class="section-label"><em>🚣</em> Day 4 · 小樽</div>
+      <div class="souvenir-card">
+        <div class="souvenir-card-top"><div class="souvenir-emoji">🧀</div><div class="souvenir-meta"><div class="souvenir-name">LeTAO 雙層乳酪蛋糕（Double Fromage）</div><div class="souvenir-loc">📍 LeTAO 本店：小樽市堺町7-16</div></div></div>
+        <div class="souvenir-desc">小樽最知名甜點品牌，招牌「Double Fromage」雙層乳酪蛋糕上層口感鬆軟、下層濃郁，雙重口感不膩口。此外，皇家山峰紅茶巧克力也是常年人氣商品，小樽本店有千歲機場買不到的限定品項。</div>
+        <a class="souvenir-link" href="https://gogojp.tw/otaru-gourmet/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="souvenir-card">
+        <div class="souvenir-card-top"><div class="souvenir-emoji">🍡</div><div class="souvenir-meta"><div class="souvenir-name">北菓樓 夢不思議泡芙 &amp; 妖精之森年輪蛋糕</div><div class="souvenir-loc">📍 北菓樓 小樽本館：小樽市堺町7-22</div></div></div>
+        <div class="souvenir-desc">銷售No.1的「夢不思議泡芙」酥脆外皮包裹滑順奶油，令人魂縈夢牽！「妖精之森年輪蛋糕」使用北海道小麥、生乳、雞蛋一層一層耗時烘烤，口感綿密柔軟，每一層年輪間還有砂糖的獨特口感。</div>
+        <a class="souvenir-link" href="https://gogojp.tw/otaru-gourmet/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="souvenir-card">
+        <div class="souvenir-card-top"><div class="souvenir-emoji">🍪</div><div class="souvenir-meta"><div class="souvenir-name">六花亭 MARUSEI奶油葡萄夾心餅乾</div><div class="souvenir-loc">📍 六花亭 小樽運河店：小樽市堺町4-7</div></div></div>
+        <div class="souvenir-desc">北海道最具代表性的伴手禮，幾乎人手必帶一盒！以北海道鮮奶製作的奶油夾心，搭配浸泡於蘭姆酒的葡萄乾，是獨特的迷人風味。小樽運河店緊鄰運河，逛完順手買伴手禮超方便。</div>
+        <a class="souvenir-link" href="https://www.funliday.com/posts/otaru-food-top10/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="souvenir-card">
+        <div class="souvenir-card-top"><div class="souvenir-emoji">🍈</div><div class="souvenir-meta"><div class="souvenir-name">Poplar Farm 哈密瓜霜淇淋（サンタのヒゲ）</div><div class="souvenir-loc">📍 小樽出抜小路内 / 小樽市色内1-1-17</div></div></div>
+        <div class="souvenir-desc">小樽出拔小路內的哈密瓜甜品專賣店，招牌「Santa的鬍鬚」是將香甜哈密瓜霜淇淋擠在半顆哈密瓜上的豪邁冰品，甜而不膩果香撲鼻，加入紅豆粒或巧克力脆片的變化版也非常美味。</div>
+        <a class="souvenir-link" href="https://tasting-japan.com/archives/4786" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+
+      <div class="section-label"><em>🏙️</em> Day 4 · 札幌 / 狸小路商店街</div>
+      <div class="souvenir-card">
+        <div class="souvenir-card-top"><div class="souvenir-emoji">💊</div><div class="souvenir-meta"><div class="souvenir-name">狸小路 各大藥妝店掃貨</div><div class="souvenir-loc">📍 狸小路商店街 1-7丁目</div></div></div>
+        <div class="souvenir-desc">全長900公尺的拱頂商店街内匯集松本清、唐吉訶德等多家藥妝店，可以找到北海道限定的美妝保養品、藥品和零食。建議各家比價，善用免稅服務（門檻為市價20萬日圓以内），邊逛邊買不踩雷。</div>
+        <a class="souvenir-link" href="https://hokkaido.letsgojp.com/archives/428788/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+
+      <div class="section-label"><em>✈️</em> Day 1 &amp; 5 · 新千歲機場限定</div>
+      <div class="souvenir-card">
+        <div class="souvenir-card-top"><div class="souvenir-emoji">🥐</div><div class="souvenir-meta"><div class="souvenir-name">六花亭 機場限定「賞味期限10分鐘」酥脆派</div><div class="souvenir-loc">📍 新千歲機場 六花亭門市</div></div></div>
+        <div class="souvenir-desc">全日本獨一無二、只在新千歲機場才買得到的限定甜點！只有機場賣、只有機場吃，賞味期限僅10分鐘的超酥脆派，酥到掉渣的口感令人驚喜。建議在出發前最後一刻排隊購入，趁熱享用！</div>
+        <a class="souvenir-link" href="https://www.daisyyohoho.com/hokkaido-delicious/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
+      </div>
+      <div class="souvenir-card">
+        <div class="souvenir-card-top"><div class="souvenir-emoji">🍫</div><div class="souvenir-meta"><div class="souvenir-name">白色戀人（白い恋人）</div><div class="souvenir-loc">📍 新千歲機場 &amp; 札幌市内各處</div></div></div>
+        <div class="souvenir-desc">北海道最經典伴手禮，幾乎是遊客必帶的代名詞！薄酥餅乾夾白巧克力的簡單組合，入口即化香甜不膩。機場與狸小路均有販售，建議行程最後在機場採購，避免在旅途中壓壞。</div>
+        <a class="souvenir-link" href="https://bobbyfun.tw/2024-02-05-2877/" target="_blank" rel="noopener">🔗 查看推薦來源</a>
       </div>
     </div>
 
   </div><!-- /content-col -->
 
-  <!-- RIGHT: Map panel -->
+  <!-- ─── MAP PANEL ─── -->
   <div class="map-panel">
     <div id="map"></div>
     <div class="map-legend">
-      <h4>行程路線圖例</h4>
-      <div class="legend-list">
-        <div class="legend-item" onclick="switchDay('all')" id="leg-all" style="color:#888;">
-          <div class="ldot" style="background:#888;"></div>全部
+      <!-- Route legend (default) -->
+      <div id="legend-route">
+        <h4>行程路線圖例</h4>
+        <div class="legend-list">
+          <div class="legend-item" onclick="switchDay('all')" id="leg-all" style="color:#888"><div class="ldot" style="background:#888"></div>全部</div>
+          <div class="legend-item" onclick="switchDay(1)" id="leg-1" style="color:var(--d1)"><div class="ldot" style="background:var(--d1)"></div>Day 1</div>
+          <div class="legend-item" onclick="switchDay(2)" id="leg-2" style="color:var(--d2)"><div class="ldot" style="background:var(--d2)"></div>Day 2</div>
+          <div class="legend-item" onclick="switchDay(3)" id="leg-3" style="color:var(--d3)"><div class="ldot" style="background:var(--d3)"></div>Day 3</div>
+          <div class="legend-item" onclick="switchDay(4)" id="leg-4" style="color:var(--d4)"><div class="ldot" style="background:var(--d4)"></div>Day 4</div>
+          <div class="legend-item" onclick="switchDay(5)" id="leg-5" style="color:var(--d5)"><div class="ldot" style="background:var(--d5)"></div>Day 5</div>
         </div>
-        <div class="legend-item" onclick="switchDay(1)" id="leg-1" style="color:var(--d1);">
-          <div class="ldot" style="background:var(--d1);"></div>Day 1
+      </div>
+      <!-- Food legend -->
+      <div id="legend-food" style="display:none">
+        <h4>美食地點圖例</h4>
+        <div class="legend-list">
+          <div class="legend-item" style="color:var(--food);pointer-events:none"><div class="ldot" style="background:var(--food)"></div>🍜 推薦餐廳</div>
+          <div class="legend-item" style="color:#888;font-size:11px;pointer-events:none;border:none;padding:0 4px">點擊地圖標記查看詳情</div>
         </div>
-        <div class="legend-item" onclick="switchDay(2)" id="leg-2" style="color:var(--d2);">
-          <div class="ldot" style="background:var(--d2);"></div>Day 2
+        <div style="margin-top:10px;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:var(--text-light);line-height:1.6">
+          地圖標示從洞爺湖、函館到小樽、札幌等地的推薦餐廳位置，點擊標記可查看餐廳名稱與所在地。
         </div>
-        <div class="legend-item" onclick="switchDay(3)" id="leg-3" style="color:var(--d3);">
-          <div class="ldot" style="background:var(--d3);"></div>Day 3
+      </div>
+      <!-- Souvenir legend -->
+      <div id="legend-souvenir" style="display:none">
+        <h4>特產&零食地點圖例</h4>
+        <div class="legend-list">
+          <div class="legend-item" style="color:var(--souvenir);pointer-events:none"><div class="ldot" style="background:var(--souvenir)"></div>🎁 必買特產</div>
+          <div class="legend-item" style="color:#888;font-size:11px;pointer-events:none;border:none;padding:0 4px">點擊地圖標記查看詳情</div>
         </div>
-        <div class="legend-item" onclick="switchDay(4)" id="leg-4" style="color:var(--d4);">
-          <div class="ldot" style="background:var(--d4);"></div>Day 4
-        </div>
-        <div class="legend-item" onclick="switchDay(5)" id="leg-5" style="color:var(--d5);">
-          <div class="ldot" style="background:var(--d5);"></div>Day 5
+        <div style="margin-top:10px;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:var(--text-light);line-height:1.6">
+          地圖標示各景點的推薦特產伴手禮商店位置，包含函館、小樽、札幌與新千歲機場限定品。
         </div>
       </div>
     </div>
   </div>
-
-</div><!-- /wrapper -->
+</div>
 
 <!-- ═══ WARNINGS ═══ -->
 <section class="warnings">
   <div class="warn-inner">
     <div class="warn-title">⚠️ 旅遊風險與溫馨提醒</div>
     <div class="warn-grid">
-      <div class="warn-card">
-        <div class="warn-emoji">🧥</div>
-        <div class="warn-card-title">服裝建議</div>
-        <div class="warn-card-body">4月底至5月初的北海道屬春季，氣候仍較涼爽。建議攜帶外套和薄毛衣，採「<strong>洋蔥式穿法</strong>」以應對早晚溫差，隨時增減衣物。</div>
-      </div>
-      <div class="warn-card">
-        <div class="warn-emoji">🔋</div>
-        <div class="warn-card-title">行動電源規範</div>
-        <div class="warn-card-body">行動電源及備用鋰電池<strong>絕對不可託運</strong>，必須隨身攜帶上機。自2025年3月1日起，長榮等多家航空已全面<strong>禁止在航程中使用及充電行動電源</strong>。</div>
-      </div>
-      <div class="warn-card">
-        <div class="warn-emoji">♨️</div>
-        <div class="warn-card-title">泡湯禮儀</div>
-        <div class="warn-card-body">浸泡溫泉前務必先<strong>洗淨身體</strong>。日本許多大浴場仍規定「刺青者請勿進入」，若有此情況建議提前向領隊確認是否有<strong>貸切風呂（個人湯屋）</strong>可使用。</div>
-      </div>
-      <div class="warn-card">
-        <div class="warn-emoji">🧳</div>
-        <div class="warn-card-title">行李重量限制</div>
-        <div class="warn-card-body">回程託運行李<strong>每人限一件，限重 23 公斤</strong>，請妥善規劃購物預算，避免超重費用。機場免稅商店可在最後補貨，但務必預留行李空間。</div>
-      </div>
+      <div class="warn-card"><div class="warn-emoji">🧥</div><div class="warn-card-title">服裝建議</div><div class="warn-card-body">4月底至5月初的北海道屬春季，氣候仍較涼爽。建議攜帶外套和薄毛衣，採「<strong>洋蔥式穿法</strong>」以應對早晚溫差。</div></div>
+      <div class="warn-card"><div class="warn-emoji">🔋</div><div class="warn-card-title">行動電源規範</div><div class="warn-card-body">行動電源及備用鋰電池<strong>絕對不可託運</strong>，必須隨身攜帶上機。自2025年3月1日起，長榮等多家航空已全面<strong>禁止在航程中使用及充電行動電源</strong>。</div></div>
+      <div class="warn-card"><div class="warn-emoji">♨️</div><div class="warn-card-title">泡湯禮儀</div><div class="warn-card-body">浸泡溫泉前務必先<strong>洗淨身體</strong>。日本許多大浴場仍規定「刺青者請勿進入」，若有此情況建議提前向領隊確認是否有<strong>貸切風呂（個人湯屋）</strong>可使用。</div></div>
+      <div class="warn-card"><div class="warn-emoji">🧳</div><div class="warn-card-title">行李重量限制</div><div class="warn-card-body">回程託運行李<strong>每人限一件，限重 23 公斤</strong>，請妥善規劃購物預算，避免超重費用。機場免稅商店可在最後補貨，但務必預留行李空間。</div></div>
     </div>
   </div>
 </section>
+<!-- ═══ FLIGHT & TOUR INFO ═══ -->
+<section class="trip-info">
+  <div class="trip-inner">
 
-<footer>
-  © 北海道五天四夜深度旅遊行程 · 互動版行程規劃 · 地圖資料來源 © OpenStreetMap contributors
-</footer>
+    <!-- Section title -->
+    <div class="trip-section-title">✈️ 航班 &amp; 旅遊團資訊</div>
+
+    <div class="trip-grid">
+
+      <!-- ── OUTBOUND FLIGHT ── -->
+      <div class="trip-card flight-card">
+        <div class="trip-card-header outbound">
+          <span class="flight-dir-badge">去程</span>
+          <span class="flight-code">長榮航空 BR166</span>
+          <span class="flight-tag">EVA Air</span>
+        </div>
+        <div class="flight-route">
+          <div class="flight-endpoint">
+            <div class="airport-code">TPE</div>
+            <div class="airport-name">臺北桃園機場</div>
+            <div class="flight-time">06:55</div>
+            <div class="flight-date">2026 / 04 / 29</div>
+          </div>
+          <div class="flight-mid">
+            <div class="flight-duration">約 3 小時</div>
+            <div class="flight-line"><span></span><span class="plane-icon">✈</span><span></span></div>
+            <div class="flight-note">直飛</div>
+          </div>
+          <div class="flight-endpoint right">
+            <div class="airport-code">CTS</div>
+            <div class="airport-name">新千歲機場</div>
+            <div class="flight-time">11:55</div>
+            <div class="flight-date">2026 / 04 / 29</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RETURN FLIGHT ── -->
+      <div class="trip-card flight-card">
+        <div class="trip-card-header return">
+          <span class="flight-dir-badge return-badge">回程</span>
+          <span class="flight-code">長榮航空 BR165</span>
+          <span class="flight-tag">EVA Air</span>
+        </div>
+        <div class="flight-route">
+          <div class="flight-endpoint">
+            <div class="airport-code">CTS</div>
+            <div class="airport-name">新千歲機場</div>
+            <div class="flight-time">13:00</div>
+            <div class="flight-date">2026 / 05 / 03</div>
+          </div>
+          <div class="flight-mid">
+            <div class="flight-duration">約 3 小時</div>
+            <div class="flight-line"><span></span><span class="plane-icon">✈</span><span></span></div>
+            <div class="flight-note">直飛</div>
+          </div>
+          <div class="flight-endpoint right">
+            <div class="airport-code">TPE</div>
+            <div class="airport-name">臺北桃園機場</div>
+            <div class="flight-time">16:20</div>
+            <div class="flight-date">2026 / 05 / 03</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TOUR INFO ── -->
+      <div class="trip-card tour-card">
+        <div class="tour-card-title">📋 旅遊團資訊</div>
+        <div class="tour-rows">
+          <div class="tour-row">
+            <span class="tour-label">團號</span>
+            <span class="tour-value mono">JHG26429BR05TC</span>
+          </div>
+          <div class="tour-row">
+            <span class="tour-label">團名</span>
+            <span class="tour-value">北海道函館遇見櫻飛舞5日（千歲／千歲）</span>
+          </div>
+          <div class="tour-row">
+            <span class="tour-label">領隊</span>
+            <span class="tour-value">劉浩</span>
+          </div>
+          <div class="tour-row">
+            <span class="tour-label">行李牌</span>
+            <span class="tour-value">長汎假期</span>
+          </div>
+          <div class="tour-row">
+            <span class="tour-label">胸牌</span>
+            <span class="tour-value">無</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MEETING INFO ── -->
+      <div class="trip-card meeting-card">
+        <div class="tour-card-title">⏰ 集合資訊</div>
+        <div class="meeting-time-block">
+          <div class="meeting-time-label">集合時間</div>
+          <div class="meeting-time-value">2026 / 04 / 29　<strong>04:25</strong></div>
+        </div>
+        <div class="tour-rows" style="margin-top:14px">
+          <div class="tour-row">
+            <span class="tour-label">集合地點</span>
+            <span class="tour-value">台灣桃園國際機場<br>第二航站 長榮航空 <strong>20號團體櫃台</strong></span>
+          </div>
+          <div class="tour-row">
+            <span class="tour-label">送機</span>
+            <span class="tour-value">鴻揚流通事業有限公司</span>
+          </div>
+        </div>
+        <div class="meeting-alert">★ 請團員到達機場集合時，主動與領隊或送機人員聯絡，以免久候！</div>
+      </div>
+
+      <!-- ── CONTACTS ── -->
+      <div class="trip-card contact-card">
+        <div class="tour-card-title">📞 緊急聯絡資訊</div>
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="contact-role">領隊 劉浩｜台灣手機</div>
+            <a class="contact-number" href="tel:+886987815793">886-987-815-793</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-role">領隊 劉浩｜日本手機</div>
+            <a class="contact-number" href="tel:+81808554-6674">81-080-8554-6674</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-role">鴻揚送機</div>
+            <a class="contact-number" href="tel:0958402842">0958-402-842</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /trip-grid -->
+  </div><!-- /trip-inner -->
+</section>
+
+<footer>© 北海道五天四夜深度旅遊行程 · 互動版行程規劃 · 地圖資料 © OpenStreetMap contributors · CARTO</footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-/* ─── SNOWFLAKES ─── */
-const sfC = document.getElementById('sfContainer');
-for (let i = 0; i < 30; i++) {
-  const sf = document.createElement('div');
-  sf.className = 'sf';
-  sf.style.cssText = `
-    left: ${Math.random()*100}%;
-    width: ${3 + Math.random()*5}px;
-    height: ${3 + Math.random()*5}px;
-    animation-duration: ${6 + Math.random()*12}s;
-    animation-delay: ${-Math.random()*15}s;
-    opacity: ${0.1 + Math.random()*0.25};
-  `;
-  sfC.appendChild(sf);
+/* ── SNOWFLAKES ── */
+const sfC=document.getElementById('sfContainer');
+for(let i=0;i<30;i++){const s=document.createElement('div');s.className='sf';s.style.cssText=`left:${Math.random()*100}%;width:${3+Math.random()*5}px;height:${3+Math.random()*5}px;animation-duration:${6+Math.random()*12}s;animation-delay:${-Math.random()*15}s;opacity:${.1+Math.random()*.25};`;sfC.appendChild(s);}
+
+/* ── IN-MEMORY NOTES STORE ── */
+const notesStore = {};
+
+function toggleNotes(id) {
+  const body = document.getElementById('notes-'+id);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  const btn = body.previousElementSibling.previousElementSibling;
+  btn.innerHTML = `<span class="nt-icon">📝</span>${isOpen ? '新增備註' : '收起備註'}`;
+  if (!isOpen && notesStore[id]) {
+    document.getElementById('textarea-'+id).value = notesStore[id];
+  }
 }
 
-/* ─── MAP DATA ─── */
-const dayColors = { 1:'#2e7fa0', 2:'#7454a8', 3:'#2a8060', 4:'#c47030', 5:'#b83030' };
-
-const allMarkers = {
-  d1_0: { lat:42.7791, lng:141.6866, name:'新千歲機場', tag:'入境・出境', day:1 },
-  d1_1: { lat:42.58,   lng:141.47,   name:'北國馬牧場', tag:'日高・牧場體驗', day:1 },
-  d1_2: { lat:42.625,  lng:140.843,  name:'洞爺湖花火大會', tag:'夜間必訪', day:1 },
-  d2_0: { lat:42.543,  lng:140.865,  name:'昭和新山', tag:'活火山奇景', day:2 },
-  d2_1: { lat:41.97,   lng:140.678,  name:'大沼・小沼公園', tag:'國定公園', day:2 },
-  d2_2: { lat:41.7665, lng:140.7164, name:'函館金森倉庫群', tag:'歷史建築', day:2 },
-  d2_3: { lat:41.7969, lng:140.7568, name:'五稜廓', tag:'西洋式城堡', day:2 },
-  d2_4: { lat:41.825,  lng:140.795,  name:'女子修道院', tag:'哥德式建築', day:2 },
-  d2_5: { lat:41.7595, lng:140.7047, name:'函館山百萬夜景', tag:'世界三大夜景', day:2 },
-  d3_0: { lat:41.7725, lng:140.7257, name:'函館漁市（朝市）', tag:'早市海鮮', day:3 },
-  d3_1: { lat:42.4976, lng:141.1487, name:'登別地獄谷', tag:'地熱奇景', day:3 },
-  d3_2: { lat:42.47,   lng:141.14,   name:'登別櫻花大道', tag:'春季限定', day:3 },
-  d3_3: { lat:42.455,  lng:141.182,  name:'尼克斯海洋公園', tag:'海洋樂園', day:3 },
-  d4_0: { lat:43.199,  lng:141.002,  name:'小樽運河', tag:'浪漫水道', day:4 },
-  d4_1: { lat:43.054,  lng:141.308,  name:'北海道神宮・圓山公園', tag:'精神地標', day:4 },
-  d4_2: { lat:43.057,  lng:141.353,  name:'狸小路商店街', tag:'購物天堂', day:4 },
-  d5_0: { lat:43.123,  lng:141.427,  name:'莫埃來沼公園', tag:'大地藝術', day:5 },
-  d5_1: { lat:42.7791, lng:141.6866, name:'新千歲機場（出發）', tag:'返程', day:5 },
-};
-
-const dayRoutes = {
-  1: ['d1_0','d1_1','d1_2'],
-  2: ['d2_0','d2_1','d2_2','d2_3','d2_4','d2_5'],
-  3: ['d3_0','d3_1','d3_2','d3_3'],
-  4: ['d4_0','d4_1','d4_2'],
-  5: ['d5_0','d5_1'],
-};
-
-/* ─── INIT MAP ─── */
-const map = L.map('map', {
-  center: [42.35, 141.2],
-  zoom: 7,
-  zoomControl: true,
-  attributionControl: true
-});
-
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-  attribution: '© OpenStreetMap contributors © CARTO',
-  maxZoom: 19
-}).addTo(map);
-
-/* Create markers */
-const leafletMarkers = {};
-const leafletRoutes = {};
-
-function makeIcon(color, num) {
-  return L.divIcon({
-    className: '',
-    html: `<div style="
-      background:${color};
-      color:white;
-      width:30px;height:30px;
-      border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      font-size:12px;font-weight:700;
-      border:2.5px solid white;
-      box-shadow:0 2px 8px rgba(0,0,0,0.3);
-      font-family:'Noto Sans TC',sans-serif;
-    ">${num}</div>`,
-    iconSize:[30,30], iconAnchor:[15,15], popupAnchor:[0,-18]
-  });
+function saveNote(id) {
+  const val = document.getElementById('textarea-'+id).value.trim();
+  notesStore[id] = val;
+  const preview = document.getElementById('preview-'+id);
+  if (val) {
+    preview.textContent = '📌 ' + (val.length > 40 ? val.slice(0,40)+'…' : val);
+    preview.classList.add('has-note');
+  } else {
+    preview.textContent = '';
+    preview.classList.remove('has-note');
+  }
+  const saved = document.getElementById('saved-'+id);
+  saved.classList.add('show');
+  setTimeout(()=>saved.classList.remove('show'), 2000);
 }
 
-let stopCount = {};
-Object.entries(allMarkers).forEach(([key, m]) => {
-  const d = m.day;
-  stopCount[d] = (stopCount[d]||0) + 1;
-  const n = stopCount[d];
-  const marker = L.marker([m.lat, m.lng], { icon: makeIcon(dayColors[d], n) })
+function clearNote(id) {
+  notesStore[id] = '';
+  document.getElementById('textarea-'+id).value = '';
+  const preview = document.getElementById('preview-'+id);
+  preview.textContent = '';
+  preview.classList.remove('has-note');
+  const body = document.getElementById('notes-'+id);
+  body.classList.remove('open');
+  const btn = body.previousElementSibling.previousElementSibling;
+  btn.innerHTML = '<span class="nt-icon">📝</span>新增備註';
+}
+
+/* ── MAP DATA ── */
+const dayColors={1:'#2e7fa0',2:'#7454a8',3:'#2a8060',4:'#c47030',5:'#b83030'};
+const allMarkers={
+  d1_0:{lat:42.7791,lng:141.6866,name:'新千歲機場',tag:'入境・出境',day:1},
+  d1_1:{lat:42.58,lng:141.47,name:'北國馬牧場',tag:'日高・牧場體驗',day:1},
+  d1_2:{lat:42.625,lng:140.843,name:'洞爺湖花火大會',tag:'夜間必訪',day:1},
+  d2_0:{lat:42.543,lng:140.865,name:'昭和新山',tag:'活火山奇景',day:2},
+  d2_1:{lat:41.97,lng:140.678,name:'大沼・小沼公園',tag:'國定公園',day:2},
+  d2_2:{lat:41.7665,lng:140.7164,name:'函館金森倉庫群',tag:'歷史建築',day:2},
+  d2_3:{lat:41.7969,lng:140.7568,name:'五稜廓',tag:'西洋式城堡',day:2},
+  d2_4:{lat:41.825,lng:140.795,name:'女子修道院',tag:'哥德式建築',day:2},
+  d2_5:{lat:41.7595,lng:140.7047,name:'函館山百萬夜景',tag:'世界三大夜景',day:2},
+  d3_0:{lat:41.7725,lng:140.7257,name:'函館漁市（朝市）',tag:'早市海鮮',day:3},
+  d3_1:{lat:42.4976,lng:141.1487,name:'登別地獄谷',tag:'地熱奇景',day:3},
+  d3_2:{lat:42.47,lng:141.14,name:'登別櫻花大道',tag:'春季限定',day:3},
+  d3_3:{lat:42.455,lng:141.182,name:'尼克斯海洋公園',tag:'海洋樂園',day:3},
+  d4_0:{lat:43.199,lng:141.002,name:'小樽運河',tag:'浪漫水道',day:4},
+  d4_1:{lat:43.054,lng:141.308,name:'北海道神宮・圓山公園',tag:'精神地標',day:4},
+  d4_2:{lat:43.057,lng:141.353,name:'狸小路商店街',tag:'購物天堂',day:4},
+  d5_0:{lat:43.123,lng:141.427,name:'莫埃來沼公園',tag:'大地藝術',day:5},
+  d5_1:{lat:42.7791,lng:141.6866,name:'新千歲機場（出發）',tag:'返程',day:5},
+};
+const dayRoutes={1:['d1_0','d1_1','d1_2'],2:['d2_0','d2_1','d2_2','d2_3','d2_4','d2_5'],3:['d3_0','d3_1','d3_2','d3_3'],4:['d4_0','d4_1','d4_2'],5:['d5_0','d5_1']};
+
+/* ── FOOD & SOUVENIR MARKER DATA ── */
+const foodData = [
+  {lat:42.610,lng:140.770,name:'Lake Hill Farm',tag:'Day1 · 洞爺湖 · 冰淇淋小屋',icon:'🍦'},
+  {lat:41.7688,lng:140.7192,name:'幸運小丑漢堡（ラッキーピエロ）',tag:'Day2 · 函館金森倉庫旁',icon:'🍔'},
+  {lat:41.7940,lng:140.7556,name:'味彩拉麵 あじさい',tag:'Day2 · 函館五稜廓附近',icon:'🍜'},
+  {lat:41.7735,lng:140.7270,name:'HASEGAWA STORE',tag:'Day2・3 · 函館駅前',icon:'🍱'},
+  {lat:41.7726,lng:140.7252,name:'村上海膽 函館本店',tag:'Day3 · 函館朝市',icon:'🦔'},
+  {lat:41.7728,lng:140.7258,name:'きくよ食堂（KIKUYO食堂）',tag:'Day3 · 函館朝市',icon:'🍣'},
+  {lat:41.7730,lng:140.7265,name:'駅二市場 釣烏賊體驗',tag:'Day3 · 函館朝市',icon:'🦑'},
+  {lat:43.1936,lng:141.0036,name:'若雞時代 なると本店',tag:'Day4 · 小樽',icon:'🍗'},
+  {lat:43.1980,lng:141.0030,name:'小樽政壽司 本店',tag:'Day4 · 小樽',icon:'🍣'},
+  {lat:43.2001,lng:141.0022,name:'小樽倉庫 No.1',tag:'Day4 · 小樽港口',icon:'🍺'},
+  {lat:43.0570,lng:141.3520,name:'GARAKU 湯咖哩',tag:'Day4 · 札幌狸小路附近',icon:'🍛'},
+  {lat:43.0550,lng:141.3510,name:'達摩成吉思汗烤肉',tag:'Day4 · 札幌薄野',icon:'🐑'},
+  {lat:43.0700,lng:141.3490,name:'札幌螃蟹本家',tag:'Day4 · 札幌車站附近',icon:'🦀'},
+];
+const souvenirData = [
+  {lat:41.7703,lng:140.7275,name:"Pastry Snaffle's",tag:'Day2 · 函館 · 起司蛋糕',icon:'🍰'},
+  {lat:41.7693,lng:140.7220,name:'五島軒 咖哩料理包',tag:'Day2 · 函館市中心',icon:'🍛'},
+  {lat:41.7665,lng:140.7165,name:'金森倉庫 限定伴手禮',tag:'Day2 · 函館灣區',icon:'🎪'},
+  {lat:43.1893,lng:141.0082,name:'LeTAO 雙層乳酪蛋糕',tag:'Day4 · 小樽堺町通',icon:'🧀'},
+  {lat:43.1892,lng:141.0080,name:'北菓樓 夢不思議泡芙',tag:'Day4 · 小樽堺町通',icon:'🍡'},
+  {lat:43.1895,lng:141.0073,name:'六花亭 小樽運河店',tag:'Day4 · 小樽堺町通',icon:'🍪'},
+  {lat:43.1928,lng:141.0075,name:'Poplar Farm 哈密瓜霜淇淋',tag:'Day4 · 小樽出抜小路',icon:'🍈'},
+  {lat:43.0572,lng:141.3527,name:'狸小路 藥妝掃貨',tag:'Day4 · 札幌狸小路',icon:'💊'},
+  {lat:42.7795,lng:141.6875,name:'六花亭 機場限定酥脆派',tag:'Day1・5 · 新千歲機場',icon:'🥐'},
+  {lat:42.7790,lng:141.6868,name:'白色戀人（白い恋人）',tag:'Day1・5 · 新千歲機場',icon:'🍫'},
+];
+
+/* ── INIT MAP ── */
+const map=L.map('map',{center:[42.35,141.2],zoom:7,zoomControl:true,attributionControl:true});
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap contributors © CARTO',maxZoom:19}).addTo(map);
+
+/* ── ICON FACTORIES ── */
+function makeIcon(color,num){
+  return L.divIcon({className:'',
+    html:`<div style="background:${color};color:white;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:2.5px solid white;box-shadow:0 2px 8px rgba(0,0,0,.3);font-family:'Noto Sans TC',sans-serif;">${num}</div>`,
+    iconSize:[30,30],iconAnchor:[15,15],popupAnchor:[0,-18]});
+}
+function makePoiIcon(color, emoji) {
+  return L.divIcon({className:'',
+    html:`<div style="background:${color};width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;border:2.5px solid white;box-shadow:0 3px 10px rgba(0,0,0,.3);">${emoji}</div>`,
+    iconSize:[36,36],iconAnchor:[18,18],popupAnchor:[0,-20]});
+}
+
+/* ── BUILD ITINERARY MARKERS ── */
+const leafletMarkers={},leafletRoutes={};
+let stopCount={};
+Object.entries(allMarkers).forEach(([key,m])=>{
+  const d=m.day;
+  stopCount[d]=(stopCount[d]||0)+1;
+  const n=stopCount[d];
+  const marker=L.marker([m.lat,m.lng],{icon:makeIcon(dayColors[d],n)})
     .bindPopup(`<div class="pop-title">${m.name}</div><div class="pop-tag">Day ${d} · ${m.tag}</div>`)
     .addTo(map);
-  leafletMarkers[key] = marker;
+  leafletMarkers[key]=marker;
+});
+Object.entries(dayRoutes).forEach(([day,keys])=>{
+  const color=dayColors[day];
+  const latlngs=keys.map(k=>[allMarkers[k].lat,allMarkers[k].lng]);
+  const line=L.polyline(latlngs,{color,weight:3,opacity:.75,dashArray:'8,6',lineJoin:'round'}).addTo(map);
+  leafletRoutes[day]=line;
 });
 
-/* Create route polylines */
-Object.entries(dayRoutes).forEach(([day, keys]) => {
-  const color = dayColors[day];
-  const latlngs = keys.map(k => [allMarkers[k].lat, allMarkers[k].lng]);
-  const line = L.polyline(latlngs, {
-    color: color,
-    weight: 3,
-    opacity: 0.75,
-    dashArray: '8,6',
-    lineJoin: 'round'
-  }).addTo(map);
-  leafletRoutes[day] = line;
+/* ── BUILD FOOD MARKERS (hidden initially) ── */
+const foodLeafletMarkers = foodData.map(f => {
+  const m = L.marker([f.lat,f.lng],{icon:makePoiIcon('#e85a2a', f.icon)})
+    .bindPopup(`<div class="pop-title">${f.name}</div><div class="pop-tag">${f.tag}</div>`);
+  m.setOpacity(0); // hidden initially — we add to map only when needed
+  return m;
 });
 
-/* ─── DAY SWITCHING ─── */
-let currentDay = 'all';
+/* ── BUILD SOUVENIR MARKERS (hidden initially) ── */
+const souvenirLeafletMarkers = souvenirData.map(s => {
+  const m = L.marker([s.lat,s.lng],{icon:makePoiIcon('#3a7a3a', s.icon)})
+    .bindPopup(`<div class="pop-title">${s.name}</div><div class="pop-tag">${s.tag}</div>`);
+  m.setOpacity(0);
+  return m;
+});
 
-function switchDay(day) {
-  currentDay = day;
-  // Update nav buttons
-  document.querySelectorAll('.day-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.day == day);
-  });
-  // Update panels
-  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.all-panel').forEach(p => p.classList.remove('active'));
-  if (day === 'all') {
-    document.getElementById('panel-all').classList.add('active');
-  } else {
-    const p = document.getElementById('panel-' + day);
-    if (p) p.classList.add('active');
+// Track which layer is currently on map
+let foodLayerAdded = false, souvenirLayerAdded = false;
+
+function showFoodLayer(show) {
+  if (show && !foodLayerAdded) {
+    foodLeafletMarkers.forEach(m => m.addTo(map));
+    foodLayerAdded = true;
   }
-  // Update legend
-  document.querySelectorAll('.legend-item').forEach(li => li.classList.remove('active-legend'));
-  const legEl = document.getElementById('leg-' + day);
-  if (legEl) legEl.classList.add('active-legend');
-  // Update map
+  foodLeafletMarkers.forEach(m => m.setOpacity(show ? 1 : 0));
+}
+function showSouvenirLayer(show) {
+  if (show && !souvenirLayerAdded) {
+    souvenirLeafletMarkers.forEach(m => m.addTo(map));
+    souvenirLayerAdded = true;
+  }
+  souvenirLeafletMarkers.forEach(m => m.setOpacity(show ? 1 : 0));
+}
+
+/* ── SWITCHING ── */
+let currentDay='all';
+function switchDay(day){
+  currentDay=day;
+  document.querySelectorAll('.day-btn').forEach(b=>b.classList.toggle('active',b.dataset.day==day));
+  document.querySelectorAll('.day-panel,.all-panel,.food-panel,.souvenir-panel').forEach(p=>p.classList.remove('active'));
+
+  if(day==='all'){document.getElementById('panel-all').classList.add('active');}
+  else if(day==='food'){document.getElementById('panel-food').classList.add('active');}
+  else if(day==='souvenir'){document.getElementById('panel-souvenir').classList.add('active');}
+  else{const p=document.getElementById('panel-'+day);if(p)p.classList.add('active');}
+
+  // Update legend visibility
+  document.getElementById('legend-route').style.display = (day==='food'||day==='souvenir') ? 'none' : 'block';
+  document.getElementById('legend-food').style.display    = day==='food'      ? 'block' : 'none';
+  document.getElementById('legend-souvenir').style.display= day==='souvenir'  ? 'block' : 'none';
+
+  document.querySelectorAll('.legend-item').forEach(li=>li.classList.remove('active-legend'));
+  const legEl=document.getElementById('leg-'+day);if(legEl)legEl.classList.add('active-legend');
+
   updateMap(day);
-  // Scroll content to top on mobile
-  if (window.innerWidth < 960) {
-    document.querySelector('.content-col').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  if(window.innerWidth<960){document.querySelector('.content-col').scrollIntoView({behavior:'smooth',block:'start'});}
 }
 
-function updateMap(day) {
-  const bounds = L.latLngBounds([]);
-  Object.entries(allMarkers).forEach(([key, m]) => {
-    const isActive = (day === 'all') || (m.day == day);
-    const marker = leafletMarkers[key];
-    if (isActive) {
-      marker.setOpacity(1);
-      bounds.extend([m.lat, m.lng]);
-    } else {
-      marker.setOpacity(0.15);
-    }
-  });
-  Object.entries(leafletRoutes).forEach(([d, line]) => {
-    const isActive = (day === 'all') || (d == day);
-    line.setStyle({ opacity: isActive ? 0.75 : 0.1, weight: isActive ? (day==='all' ? 2.5 : 3.5) : 1.5 });
-  });
-  if (bounds.isValid()) {
-    map.fitBounds(bounds, { padding: [40, 40], maxZoom: 11 });
+function updateMap(day){
+  const bounds=L.latLngBounds([]);
+
+  if(day==='food'){
+    // Hide itinerary markers & routes
+    Object.values(leafletMarkers).forEach(m=>m.setOpacity(0));
+    Object.values(leafletRoutes).forEach(l=>l.setStyle({opacity:0}));
+    showFoodLayer(true);
+    showSouvenirLayer(false);
+    foodLeafletMarkers.forEach(m=>bounds.extend(m.getLatLng()));
+  } else if(day==='souvenir'){
+    Object.values(leafletMarkers).forEach(m=>m.setOpacity(0));
+    Object.values(leafletRoutes).forEach(l=>l.setStyle({opacity:0}));
+    showFoodLayer(false);
+    showSouvenirLayer(true);
+    souvenirLeafletMarkers.forEach(m=>bounds.extend(m.getLatLng()));
+  } else {
+    // Normal itinerary view
+    showFoodLayer(false);
+    showSouvenirLayer(false);
+    const numericDay=(typeof day==='number')?day:parseInt(day);
+    Object.entries(allMarkers).forEach(([key,m])=>{
+      const isActive=(day==='all')||(m.day===numericDay);
+      leafletMarkers[key].setOpacity(isActive?1:.15);
+      if(isActive)bounds.extend([m.lat,m.lng]);
+    });
+    Object.entries(leafletRoutes).forEach(([d,line])=>{
+      const isActive=(day==='all')||(parseInt(d)===numericDay);
+      line.setStyle({opacity:isActive?.75:.1,weight:isActive?(day==='all'?2.5:3.5):1.5});
+    });
   }
+
+  if(bounds.isValid())map.fitBounds(bounds,{padding:[40,40],maxZoom:11});
 }
 
-function focusMarker(key) {
-  const m = allMarkers[key];
-  if (!m) return;
-  map.setView([m.lat, m.lng], 12, { animate: true });
+function focusMarker(key){
+  const m=allMarkers[key];if(!m)return;
+  map.setView([m.lat,m.lng],12,{animate:true});
   leafletMarkers[key].openPopup();
-  if (window.innerWidth < 960) {
-    document.getElementById('map').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
+  if(window.innerWidth<960){document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});}
 }
 
-// Day nav click
-document.querySelectorAll('.day-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const d = btn.dataset.day;
-    switchDay(d === 'all' ? 'all' : parseInt(d));
+/* ── NAV CLICKS ── */
+document.querySelectorAll('.day-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const d=btn.dataset.day;
+    if(d==='all'||d==='food'||d==='souvenir'){switchDay(d);}
+    else{switchDay(parseInt(d));}
   });
 });
 
-// Initial state
 updateMap('all');
 document.getElementById('leg-all').classList.add('active-legend');
 </script>
